@@ -57,8 +57,10 @@ html(lang="en")
              
           
             div.edit-and-delete-button-wrapper    
-              button.edit-notes(data-note=JSON.stringify(note)) Edit Note
-              button.delete-note(onclick=`deleteNote('${note._id}')`) Delete Note
+                button(class="edit-notes", data-note=JSON.stringify(note)) 
+                  | <i class="fa-solid fa-pen-to-square"></i> Edit Note
+                button(class="delete-note", data-note=JSON.stringify(note)) 
+                  | <i class="fa-solid fa-trash"></i> Delete Note
 
           div#each-note-display
             form(action='/notes/dashboard/edit', method='post', onsubmit="submitForm(event)", enctype="application/x-www-form-urlencoded")
@@ -74,9 +76,15 @@ html(lang="en")
               label(for='dueDate') Due Date:
               input(type='text', id='dueDate', name='due_date',)
 
-              label(for='status') Status:
-              input(type='text', id='status', name='status',)
-
+              label(for='status', class="status-label") Status:
+                .status-option-wrapper
+                  input(type='radio', id='statusConfirmed' class="status-input", name='status', value='Confirmed', required)
+                  label(for='status-confirmed', class="status-confirmed",) Confirmed
+                  
+                              
+                .status-option-wrapper
+                  input(type='radio', id='statusPending', class="status-input", name='status', value='Pending', required)                 
+                  label(for='status-pending', class="status-pending") Pending
               div.button-wrapper    
                 button.submit-btn(type='submit') Save Changes
                 button.cancel-btn Cancel Edit
@@ -93,11 +101,24 @@ html(lang="en")
         label(for='dueDate') Due Date:
         input(type='date', id='dueDate', name='due_date', placeholder='Enter the due date e.g 24th of August, 2023')
 
-        label(for='status') Status:
-        input(type='text', id='status', name='status', required, placeholder='Enter the note status, e.g pending, done')
-
+        label(for='status', class="status-label") Status:
+          .status-option-wrapper
+          input(type='radio', id='statusConfirmed' class="status-input", name='status', value='Confirmed', required)
+          label(for='status-confirmed', class="status-confirmed",) Confirmed
+                  
+                              
+          .status-option-wrapper
+          input(type='radio', id='statusPending', class="status-input", name='status', value='Pending', required)                 
+          label(for='status-pending', class="status-pending") Pending
+        
         div.button-wrapper    
           button.submit-btn(type='submit') Save note
           button.cancel-btn Cancel
+    div#delete-note-pop-up
+      .delete-btn-wrapper 
+        p.are-you-sure Are you sure you want to delete 
+        .confirm-cancel-btn-wrapper
+          button.confirm-btn Yes  
+          button.cancel-btn.no No 
 
   script(src="../js/dashboard.js")

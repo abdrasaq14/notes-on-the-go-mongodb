@@ -9,7 +9,7 @@ import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 import notesRouter from "./routes/notes";
 import session from "express-session";
-import { dot } from "node:test/reporters";
+
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 const app = express();

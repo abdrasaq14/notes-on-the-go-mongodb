@@ -10,6 +10,7 @@ import {
   updateNotesById,
   getRestaurantByName,
   RestaurantModel,
+  deleteNotesById,
 } from "../../schema/noteDB";
 import { notesInterface, userInterface } from "../../schema/noteDB";
 /* GET ALL NOTES listing (HOMEPAGE). */
@@ -48,30 +49,12 @@ export async function getIndividualNoteFunction(
     const userId = req.user ?? "";
     const individualNotes = await getNotesByAuthorId(userId);
     const userDetail = await getUserById(userId);
-    const searchTerm = "Reg";
-    RestaurantModel.find({
-      name: {
-        $regex: new RegExp(searchTerm, "i"),
-      } 
-      /**'i' for case-insensitive search, 
-       * $regex is a MongoDB operator when you 
-       * want to search case insensitive, else 
-       * you can use normal string, which will 
-       * only return strict matching/** */
-    }, {
-      restaurant_id: 1,
-      name: 1,
-      borough: 1,
-      cuisine: 1,
-      _id: 0,
-    })
-      .then((result) => { console.log("Matching restaurants:", result) })
-      .catch((err) => { console.error("Error querying restaurants:", err) }); 
     const extractNoteId = individualNotes.map((note) => {
       const noteid = (note._id ?? "").toString();
       const { _id, ...rest } = note.toObject(); // Use toObject() to convert Mongoose document to plain JavaScript object
-      return { ...rest, noteid };
+      return { _id, ...rest, noteid };
     });
+    console.log("extractNoteId", extractNoteId);
     res.render("dashboard", {
       individualNotes,
       userDetail,
@@ -193,6 +176,8 @@ export async function deleteNoteFunction(
 ) {
   try {
     const { noteId } = req.body;
+    console.log("noteId", noteId);
+    const deleteNote = await deleteNotesById(noteId);
     const sql = `DELETE FROM Notes WHERE NoteCode = ?`;
 
     // const deletedNotes = await new Promise((resolve, reject) => {
