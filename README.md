@@ -1,4 +1,4 @@
-# note-app-express-mongo-db# week-9-task-node
+# week-9-task-node
 
 # Task
 
