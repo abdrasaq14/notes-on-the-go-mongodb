@@ -57,10 +57,10 @@ html(lang="en")
              
           
             div.edit-and-delete-button-wrapper    
-                button(class="edit-notes", data-note=JSON.stringify(note)) 
-                  | <i class="fa-solid fa-pen-to-square"></i> Edit Note
-                button(class="delete-note", data-note=JSON.stringify(note)) 
-                  | <i class="fa-solid fa-trash"></i> Delete Note
+              button(class="edit-notes", data-note=JSON.stringify(note)) 
+                | <i class="fa-solid fa-pen-to-square"></i> Edit Note
+              button(class="delete-note", data-note=JSON.stringify(note)) 
+                | <i class="fa-solid fa-trash"></i> Delete Note
 
           div#each-note-display
             form(action='/notes/dashboard/edit', method='post', onsubmit="submitForm(event)", enctype="application/x-www-form-urlencoded")

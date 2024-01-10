@@ -175,23 +175,11 @@ export async function deleteNoteFunction(
   next: NextFunction
 ) {
   try {
-    const { noteId } = req.body;
-    console.log("noteId", noteId);
-    const deleteNote = await deleteNotesById(noteId);
-    const sql = `DELETE FROM Notes WHERE NoteCode = ?`;
-
-    // const deletedNotes = await new Promise((resolve, reject) => {
-    //   db.run(sql, [noteId], function (err: Error) {
-    //     if (err) {
-    //       reject(err); // Reject with the error
-    //     } else {
-    //       resolve(`note with ${noteId} deleted successfully`); // Resolve with the data
-    //     }
-    //   });
-    // });
-
-    //res.render("dashboard", { deletedNote: deletedNotes });
-    // Attach the user to the request for further use
+    const { noteid } = req.body;
+    console.log("noteId", noteid);
+    const deleteNote = await deleteNotesById(noteid);
+    console.log("deleteNote", deleteNote);
+    res.redirect("/notes/dashboard");
   } catch (error) {
     res.render("dashboard", { deletingError: error }); // Render an error message
   }
