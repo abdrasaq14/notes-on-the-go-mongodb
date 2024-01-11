@@ -133,6 +133,41 @@ header {
   padding: 2rem 2rem;
   min-height: 100%;
 }
+#pop-up-message-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  width: 25vw;
+  background-color: rgb(8, 207, 88);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 15px 15px 15px #042551ae;
+  animation: animateMe 1s forwards;
+  position: fixed;
+  top: 1;
+  right: 0;
+  z-index: 10000;
+}
+
+.course-create-success-message,
+#display-pop-up-message {
+  text-wrap: wrap;
+}
+
+@keyframes animateMe {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 #add-new-notes {
   background-color: #4caf50;

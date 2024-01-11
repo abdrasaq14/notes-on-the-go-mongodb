@@ -21,6 +21,9 @@ html(lang="en")
             <i class="fa-solid fa-right-from-bracket sign-out-icon"></i>   
         <i class="fa-solid fa-moon night-mode" id="night-mode"></i> 
         <i class="fa-solid fa-sun day-mode" id="day-mode"></i>
+    #pop-up-message-wrapper
+          p#display-pop-up-message
+      
     .body-wrapper   
       h1.welcome-text Hi, 
         | 
@@ -29,7 +32,6 @@ html(lang="en")
         span.exclamation !
       if individualNotes.length == 0
         p.no-note-length You note list is empty, kindly click on the button below to create one.
-      
       button#add-new-notes Click to add new note
       
       if deletedNote
