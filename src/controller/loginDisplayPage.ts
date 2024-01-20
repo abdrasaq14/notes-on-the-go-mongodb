@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 
-export default function signupPage(
+export function loginDisplayPage(
   req: Request,
   res: Response,
   next: NextFunction

@@ -13,9 +13,7 @@ export interface userInterface extends Document {
     salt: string;
     sessionToken: string;
   };
-  address: string;
   phone_no: string;
-  gender: string;
 }
 const userSchema = new mongoose.Schema({
   fullname: { type: String, required: true },
@@ -25,9 +23,8 @@ const userSchema = new mongoose.Schema({
     salt: { type: String, select: false },
     sessionToken: { type: String, select: false },
   },
-  address: { type: String, unique: true },
+
   phone_no: { type: String },
-  gender: { type: String },
 });
 
 const notesSchema = new mongoose.Schema({
@@ -60,12 +57,15 @@ const restaurantSchema = new mongoose.Schema(
     ],
     name: String,
     restaurant_id: String,
-  },
+  }
   // { collection: "restaurant" }
-);//this is the name of the collection in the database
+); //this is the name of the collection in the database
 export const UserModel = mongoose.model("UserModel", userSchema);
 export const NotesModel = mongoose.model("NotesModel", notesSchema);
-export const RestaurantModel = mongoose.model("RestaurantsModel", restaurantSchema);
+export const RestaurantModel = mongoose.model(
+  "RestaurantsModel",
+  restaurantSchema
+);
 
 // user methods
 export const getUsers = () => UserModel.find();

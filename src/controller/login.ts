@@ -39,18 +39,17 @@ export async function handleUserLogin(
     );
 
     if (!user) {
-      return res.render("login", {
-        noSuchUserError: `User with email ${email} does not exist,`,
+      return res.json({
+        noSuchUserError: `User with email ${email} does not exist`,
       });
     } else {
       const expectedPassword = user.authentication!.password
         ? hashPaswordAndConfirm(user.authentication!.salt ?? "", password)
         : "";
-      console.log("expectedPassword", expectedPassword);
+
       if (expectedPassword !== user.authentication?.password) {
-        return res.render("login", {
-          invalidPassword: `Invalid password, kindly try again`,
-        });
+        const invalidPassword = `Invalid password, kindly try again`;
+        res.json({ invalidPassword: invalidPassword });
       } else {
         const salt = random();
         if (user.authentication) {
@@ -62,7 +61,7 @@ export async function handleUserLogin(
           req.session.token = token;
         }
         await user.save();
-        res.redirect("/notes/dashboard");
+        res.json({ loginSuccessful: "login successful" });
       }
     }
   } catch (error) {

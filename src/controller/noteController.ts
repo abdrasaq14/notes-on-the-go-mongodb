@@ -1,49 +1,18 @@
 import { Request, Response, NextFunction } from "express";
 import { ZodError, z } from "zod";
 import { AuthenticatedRequest } from "../../express";
-import path from "node:path";
+
 import {
-  getNotesById,
   getUserById,
   createNote,
   getNotesByAuthorId,
   updateNotesById,
-  getRestaurantByName,
-  RestaurantModel,
   deleteNotesById,
 } from "../../schema/noteDB";
-import { notesInterface, userInterface } from "../../schema/noteDB";
-/* GET ALL NOTES listing (HOMEPAGE). */
-
-export async function getNoteFunction(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  const sql = `SELECT * FROM Notes`;
-
-  try {
-    // const notes = await new Promise<any[]>((resolve, reject) => {
-    //   db.all(sql, function (err: Error, notes: any[]) {
-    //     if (err) {
-    //       reject(err); // Reject with the error
-    //     } else {
-    //       resolve(notes); // Resolve with the data
-    //     }
-    //   });
-    // });
-    //res.render("notes", { notes });
-  } catch (error) {
-    res.render("notes", { error }); // Render an error message
-  }
-}
-
-/* GET ALL NOTES listing (HOMEPAGE). */
 
 export async function getIndividualNoteFunction(
   req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) {
   try {
     const userId = req.user ?? "";
@@ -54,7 +23,7 @@ export async function getIndividualNoteFunction(
       const { _id, ...rest } = note.toObject(); // Use toObject() to convert Mongoose document to plain JavaScript object
       return { _id, ...rest, noteid };
     });
-    console.log("extractNoteId", extractNoteId);
+
     res.render("dashboard", {
       individualNotes,
       userDetail,
@@ -106,8 +75,9 @@ export const createNewNoteFunction = async (
         status,
         author: userId,
       };
-      const createNewNote = await createNote(noteObject);
-      res.redirect("/notes/dashboard");
+      await createNote(noteObject);
+      res.json({ createNewNote: "new note created" });
+      // res.redirect("/notes/dashboard");
     }
   } catch (error) {
     if (error instanceof ZodError) {
@@ -140,8 +110,7 @@ const putNotesObjectSchema = z.object({
 // new note middle control
 export const putNewNoteFunction = async (
   req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   try {
     const validation = putNotesObjectSchema.parse(req.body);
@@ -171,8 +140,7 @@ export const putNewNoteFunction = async (
 
 export async function deleteNoteFunction(
   req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) {
   try {
     const { noteid } = req.body;

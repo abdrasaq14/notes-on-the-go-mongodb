@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div id="pop-up-message-wrapper"></div>
+    <form action="/users/login" method="post" id="login-form">
+      <div class="form-wrapper">
+        <div class="existing-note-wrapper">
+          <h1 class="existing-note">Login</h1>
+          <img src="/img/curve.png" alt="" class="existing-note-img" />
+        </div>
+
+        <label for="email">Email:</label>
+        <div class="input-inline-btn-wrapper">
+          <i class="fa-regular fa-envelope input-icon"></i>
+
+          <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          class="inline-input"
+        />
+          
+          
+        </div>
+
+
+        <label for="password">Password:</label>
+        
+        <div class="input-inline-btn-wrapper">
+          <i class="bx bx-lock-alt input-icon"></i>
+
+          <input
+          type="password"
+          id="password"
+          name="password"
+          class="password inline-input"
+          placeholder="Enter your password"
+          required
+        />
+          
+          <button
+            type="button"
+            class="view-password-btn inline-icon"
+            onclick="togglePasswordVisibility(event, 'password', '.eye-icon', '.eye-slash-icon')"
+          >
+            <i class="fa-solid fa-eye eye-icon"></i>
+            <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
+          </button>
+        </div>
+        
+
+        <div class="btn-wrapper">
+          <button  class="submit-btn" submit">Login</button>
+        </div>
+      </div>
+    </form>
+    <script src="/js/login.js"></script>
+  </body>
+</html>

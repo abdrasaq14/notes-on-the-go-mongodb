@@ -1,14 +1,9 @@
 import express from "express";
-import { getNoteFunction } from "../controller/noteController";
-import { Response, Request } from "express";
-
+import { displayIndex } from "../controller/indexDisplay";
 // implementation start here
 const router = express.Router();
 
-
 /* GET home page. */
-router.get('/', (req:Request, res:Response)=>{
-    res.render("index", {})
-});
+router.get("/", displayIndex);
 
 export default router;

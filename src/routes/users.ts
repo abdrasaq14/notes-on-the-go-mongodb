@@ -2,7 +2,7 @@ import createError from "http-errors";
 import express, { Request, Response, NextFunction } from "express";
 import signupPage from "../controller/signupDisplayPage";
 import { signupUserFunction } from "../controller/signup";
-import loginDisplayPage from "../controller/loginDisplayPage";
+import { loginDisplayPage } from "../controller/loginDisplayPage";
 import { handleUserLogin } from "../controller/login";
 import { clearCookieOnLogout } from "../controller/logout";
 import session from "express-session";

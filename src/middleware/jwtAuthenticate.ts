@@ -10,7 +10,7 @@ export async function isAuthenticated(
   try {
     const token = req.session.token;
     if (!token) {
-      return res.redirect("../users/login");
+      return res.redirect("/users/login");
     } else {
       const existingUser = await getUserBySessionToken(token);
       req.user = existingUser?._id.toString();

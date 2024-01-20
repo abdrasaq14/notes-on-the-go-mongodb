@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { isAuthenticated } from "../middleware/jwtAuthenticate";
 import {
-  getNoteFunction,
   getIndividualNoteFunction,
   createNewNoteFunction,
   deleteNoteFunction,
