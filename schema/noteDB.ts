@@ -38,34 +38,8 @@ const notesSchema = new mongoose.Schema({
   },
 });
 
-const restaurantSchema = new mongoose.Schema(
-  {
-    address: {
-      building: String,
-      coord: [Number],
-      street: String,
-      zipcode: String,
-    },
-    borough: String,
-    cuisine: String,
-    grades: [
-      {
-        date: Date,
-        grade: String,
-        score: Number,
-      },
-    ],
-    name: String,
-    restaurant_id: String,
-  }
-  // { collection: "restaurant" }
-); //this is the name of the collection in the database
 export const UserModel = mongoose.model("UserModel", userSchema);
 export const NotesModel = mongoose.model("NotesModel", notesSchema);
-export const RestaurantModel = mongoose.model(
-  "RestaurantsModel",
-  restaurantSchema
-);
 
 // user methods
 export const getUsers = () => UserModel.find();
@@ -111,5 +85,3 @@ export const updateNotesById = async (
 };
 
 // user methods
-export const getRestaurantByName = (value: string) =>
-  RestaurantModel.find({ name: value });
