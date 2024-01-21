@@ -1,10 +1,8 @@
-
 import createError from "http-errors";
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
-import bodyParser from "body-parser";
 import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 import notesRouter from "./routes/notes";
@@ -15,7 +13,8 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 
-const connection = process.env.MONGODB_URI as string;
+const connection =
+  "mongodb+srv://abdrasaq14:testdb@cluster0.fc4anjv.mongodb.net/notes_app?retryWrites=true&w=majority";
 mongoose
   .connect(connection)
   .then(() => console.log("connected to mongodb"))
