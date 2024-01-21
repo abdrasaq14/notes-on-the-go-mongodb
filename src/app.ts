@@ -13,8 +13,7 @@ import dotenv from "dotenv";
 const app = express();
 dotenv.config();
 
-const connection =
-  "mongodb+srv://abdrasaq14:testdb@cluster0.fc4anjv.mongodb.net/notes_app?retryWrites=true&w=majority";
+const connection = process.env.MONGODB_URI as string;
 mongoose
   .connect(connection)
   .then(() => console.log("connected to mongodb"))
