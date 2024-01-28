@@ -17,6 +17,8 @@ const dayMode = document.getElementById("day-mode");
 const bodyElement = document.getElementById("body");
 document.addEventListener("DOMContentLoaded", function () {
   dayMode.style.display = "none";
+
+  smallNightMode.style.display = "none";
 });
 nightMode.addEventListener("click", function () {
   changeBodyBackground();
@@ -64,84 +66,202 @@ async function clearCookieAndRedirect() {
 const editBtn = document.querySelectorAll(".edit-notes");
 const popup = document.getElementById("each-note-display");
 editBtn.forEach((btn) => {
-  const form = popup.querySelector("form");
   btn.addEventListener("click", function displayEditPop() {
     const noteData = JSON.parse(btn.dataset.note);
     const previousStatus = noteData.status;
-    // Set default values in the form fields
-    form.title.value = noteData.title;
-    form.description.value = noteData.description;
-    form.due_date.value = noteData.due_date;
 
+    const edit_course_form = popup.querySelector("#edit-note-form");
+
+    // Set default values in the form fields
+    edit_course_form.title.value = noteData.title;
+    edit_course_form.description.value = noteData.description;
+    edit_course_form.due_date.value = noteData.due_date;
     // setting the previous value
     if (previousStatus === "Confirmed") {
-      form.statusConfirmed.checked = true;
+      edit_course_form.statusConfirmed.checked = true;
     } else if (previousStatus === "Pending") {
-      form.statusPending.checked = true;
+      edit_course_form.statusPending.checked = true;
     }
 
-    form.noteId.value = noteData._id;
+    edit_course_form.noteId.value = noteData._id;
 
     // set display
     popup.style.display = "flex";
-  });
-  const cancelButton = form.querySelectorAll(".cancel-btn");
-  cancelButton.forEach((btn) => {
-    btn.addEventListener("click", function closePopup(event) {
-      event.preventDefault();
-      popup.style.display = "none";
+    const cancelButton = edit_course_form.querySelectorAll(".cancel-btn");
+    cancelButton.forEach((btn) => {
+      btn.addEventListener("click", function closePopup(event) {
+        event.preventDefault();
+        popup.style.display = "none";
+      });
     });
-  });
-  form.addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+    edit_course_form.addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      const formData = new FormData(edit_course_form);
+      const response = await fetch("/notes/dashboard/edit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData),
+      });
+      console.log("response", response);
+      if (response.ok) {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const htmlContent = await response.json();
+          const displayPopUpMessage = document.getElementById(
+            "pop-up-message-wrapper"
+          );
 
-    // Get form data
-    const formData = new FormData(form);
-    console.log(formData);
+          if (htmlContent && htmlContent.noteUpdatedSuccessfully) {
+            displayPopUpMessage.innerHTML = `
+        <div class="icon-wrapper">
+          <i class="fa-regular fa-circle-check success-icon"></i>
+        </div>
+        <div class="message-wrapper">
+          <h2 class="success-message">Success</h2>
+          <p class="display-pop-up-message">${htmlContent.noteUpdatedSuccessfully}</p>
+        </div>
+        <div class="close-wrapper">
+          <p class="close-text">CLOSE</p>
+        </div>
+        `;
+            const iconWrapper = document.querySelector(".icon-wrapper");
+            iconWrapper.style.backgroundColor = "rgb(8, 207, 88)";
+            displayPopUpMessage.style.display = "flex";
+            displayPopUpMessage.classList.add("after-success");
 
-    // Convert FormData to a plain object
-    const formDataObject = {};
-    formData.forEach((value, key) => {
-      formDataObject[key] = value;
+            setTimeout(() => {
+              displayPopUpMessage.style.animation =
+                "slide-out 1s ease-in-out backwards";
+            }, 1500);
+            const closeBtn = document.querySelector(".close-text");
+            closeBtn.addEventListener("click", function () {
+              displayPopUpMessage.classList.remove("after-success");
+              displayPopUpMessage.style.animation = "";
+              displayPopUpMessage.style.display = "none";
+            });
+            setTimeout(() => {
+              displayPopUpMessage.classList.remove("after-success");
+              displayPopUpMessage.style.animation = "";
+              displayPopUpMessage.style.display = "none";
+              window.location.assign("/notes/dashboard");
+            }, 1500);
+          } else if (
+            htmlContent &&
+            (htmlContent.uknownError ||
+              htmlContent.zodErrorMessage ||
+              htmlContent.unknownUser)
+          ) {
+            const errorMessage =
+              htmlContent.uknownError ||
+              htmlContent.zodErrorMessage ||
+              htmlContent.unknownUser;
+
+            displayPopUpMessage.innerHTML = `
+        <div class="icon-wrapper">
+          <i class="fa-regular fa-circle-xmark error-icon"></i>  
+        
+        </div>
+        <div class="message-wrapper">
+          <h2 class="success-message">Error</h2>
+          <p class="display-pop-up-message">${errorMessage}</p>
+        </div>
+        <div class="close-wrapper">
+          <p class="close-text">CLOSE</p>
+        </div>
+        `;
+            const iconWrapper = document.querySelector(".icon-wrapper");
+            iconWrapper.style.backgroundColor = "#ff0173";
+
+            displayPopUpMessage.style.display = "flex";
+            displayPopUpMessage.classList.add("after-error");
+
+            setTimeout(() => {
+              displayPopUpMessage.style.animation =
+                "slide-out 1s ease-in-out backwards";
+            }, 4000);
+            const closeBtn = document.querySelector(".close-text");
+            closeBtn.addEventListener("click", function () {
+              displayPopUpMessage.classList.remove("after-error");
+              displayPopUpMessage.style.animation = "";
+              displayPopUpMessage.style.display = "none";
+            });
+            setTimeout(() => {
+              displayPopUpMessage.classList.remove("after-error");
+              displayPopUpMessage.style.animation = "";
+              displayPopUpMessage.style.display = "none";
+            }, 4900);
+          }
+        }
+      } else {
+        displayPopUpMessage.innerHTML = `
+        <div class="icon-wrapper">
+          <i class="fa-regular fa-circle-xmark error-icon"></i>  
+        
+        </div>
+        <div class="message-wrapper">
+          <h2 class="success-message">Error</h2>
+          <p class="display-pop-up-message">Internal Server Error</p>
+        </div>
+        <div class="close-wrapper">
+          <p class="close-text">CLOSE</p>
+        </div>
+        `;
+
+        displayPopUpMessage.style.display = "flex";
+        displayPopUpMessage.classList.add("after-error");
+
+        setTimeout(() => {
+          displayPopUpMessage.style.animation =
+            "slide-out 1s ease-in-out backwards";
+        }, 4000);
+        const closeBtn = document.querySelector(".close-text");
+        closeBtn.addEventListener("click", function () {
+          displayPopUpMessage.classList.remove("after-error");
+          displayPopUpMessage.style.animation = "";
+          displayPopUpMessage.style.display = "none";
+        });
+        setTimeout(() => {
+          displayPopUpMessage.classList.remove("after-error");
+          displayPopUpMessage.style.animation = "";
+          displayPopUpMessage.style.display = "none";
+        }, 4900);
+      }
     });
-
-    // Make a POST request using Fetch API
-    await submitForm(formDataObject);
   });
 });
 // closing the edit note pop up
 
 // Handle form submission
 
-async function submitForm(formDataObject) {
-  // Make a POST request using Fetch API
-  fetch("/notes/dashboard/edit", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formDataObject),
-    credentials: "include",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // closing the pop up
-      popup.style.display = "none";
-      // referesh the page to see updates
-      location.reload();
-    })
-    .catch((error) => console.error("Error:", error));
-}
+// async function submitForm(formDataObject) {
+//   // Make a POST request using Fetch API
+
+//   fetch("/notes/dashboard/edit", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(formDataObject),
+//     credentials: "include",
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // closing the pop up
+//       popup.style.display = "none";
+//       // referesh the page to see updates
+//       location.reload();
+//     })
+//     .catch((error) => console.error("Error:", error));
+// }
 
 // add new btn event listener
 const addNewNoteBtn = document.getElementById("add-new-notes");
 const newNotePop = document.getElementById("add-new-note-pop-up");
-
-addNewNoteBtn.addEventListener("click", displayNewNote);
-
-function displayNewNote() {
+addNewNoteBtn.addEventListener("click", function (event) {
+  event.preventDefault();
   newNotePop.style.display = "flex";
-  // closing the new note pop up
   let newNoteCloseBtn = document.querySelectorAll(".cancel-btn");
   for (i = 0; i < newNoteCloseBtn.length; i++) {
     newNoteCloseBtn[i].addEventListener("click", closeNewNotePopup);
@@ -150,7 +270,143 @@ function displayNewNote() {
   function closeNewNotePopup() {
     document.getElementById("add-new-note-pop-up").style.display = "none";
   }
-}
+  const add_course_form = document.getElementById("add-course-form");
+
+  add_course_form.addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    const formData = new FormData(add_course_form);
+    const response = await fetch("/notes/dashboard/add-new-note", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(formData),
+    });
+    if (response.ok) {
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const htmlContent = await response.json();
+        const displayPopUpMessage = document.getElementById(
+          "pop-up-message-wrapper"
+        );
+
+        if (htmlContent && htmlContent.createNewNote) {
+          displayPopUpMessage.innerHTML = `
+        <div class="icon-wrapper">
+          <i class="fa-regular fa-circle-check success-icon"></i>
+        </div>
+        <div class="message-wrapper">
+          <h2 class="success-message">Success</h2>
+          <p class="display-pop-up-message">${htmlContent.createNewNote}</p>
+        </div>
+        <div class="close-wrapper">
+          <p class="close-text">CLOSE</p>
+        </div>
+        `;
+          const iconWrapper = document.querySelector(".icon-wrapper");
+          iconWrapper.style.backgroundColor = "rgb(8, 207, 88)";
+          displayPopUpMessage.style.display = "flex";
+          displayPopUpMessage.classList.add("after-success");
+
+          setTimeout(() => {
+            displayPopUpMessage.style.animation =
+              "slide-out 1s ease-in-out backwards";
+          }, 1500);
+          const closeBtn = document.querySelector(".close-text");
+          closeBtn.addEventListener("click", function () {
+            displayPopUpMessage.classList.remove("after-success");
+            displayPopUpMessage.style.animation = "";
+            displayPopUpMessage.style.display = "none";
+          });
+          setTimeout(() => {
+            displayPopUpMessage.classList.remove("after-success");
+            displayPopUpMessage.style.animation = "";
+            displayPopUpMessage.style.display = "none";
+            window.location.assign("/notes/dashboard");
+          }, 1500);
+        } else if (
+          htmlContent &&
+          (htmlContent.uknownError ||
+            htmlContent.zodErrorMessage ||
+            htmlContent.unknownUser)
+        ) {
+          const errorMessage =
+            htmlContent.uknownError ||
+            htmlContent.zodErrorMessage ||
+            htmlContent.unknownUser;
+
+          displayPopUpMessage.innerHTML = `
+        <div class="icon-wrapper">
+          <i class="fa-regular fa-circle-xmark error-icon"></i>  
+        
+        </div>
+        <div class="message-wrapper">
+          <h2 class="success-message">Error</h2>
+          <p class="display-pop-up-message">${errorMessage}</p>
+        </div>
+        <div class="close-wrapper">
+          <p class="close-text">CLOSE</p>
+        </div>
+        `;
+          const iconWrapper = document.querySelector(".icon-wrapper");
+          iconWrapper.style.backgroundColor = "#ff0173";
+
+          displayPopUpMessage.style.display = "flex";
+          displayPopUpMessage.classList.add("after-error");
+
+          setTimeout(() => {
+            displayPopUpMessage.style.animation =
+              "slide-out 1s ease-in-out backwards";
+          }, 4000);
+          const closeBtn = document.querySelector(".close-text");
+          closeBtn.addEventListener("click", function () {
+            displayPopUpMessage.classList.remove("after-error");
+            displayPopUpMessage.style.animation = "";
+            displayPopUpMessage.style.display = "none";
+          });
+          setTimeout(() => {
+            displayPopUpMessage.classList.remove("after-error");
+            displayPopUpMessage.style.animation = "";
+            displayPopUpMessage.style.display = "none";
+          }, 4900);
+        }
+      } else {
+        displayPopUpMessage.innerHTML = `
+        <div class="icon-wrapper">
+          <i class="fa-regular fa-circle-xmark error-icon"></i>  
+        
+        </div>
+        <div class="message-wrapper">
+          <h2 class="success-message">Error</h2>
+          <p class="display-pop-up-message">Internal Server Error</p>
+        </div>
+        <div class="close-wrapper">
+          <p class="close-text">CLOSE</p>
+        </div>
+        `;
+
+        displayPopUpMessage.style.display = "flex";
+        displayPopUpMessage.classList.add("after-error");
+
+        setTimeout(() => {
+          displayPopUpMessage.style.animation =
+            "slide-out 1s ease-in-out backwards";
+        }, 4000);
+        const closeBtn = document.querySelector(".close-text");
+        closeBtn.addEventListener("click", function () {
+          displayPopUpMessage.classList.remove("after-error");
+          displayPopUpMessage.style.animation = "";
+          displayPopUpMessage.style.display = "none";
+        });
+        setTimeout(() => {
+          displayPopUpMessage.classList.remove("after-error");
+          displayPopUpMessage.style.animation = "";
+          displayPopUpMessage.style.display = "none";
+        }, 4900);
+      }
+    }
+  });
+});
 
 // code to send a POST request to delete route
 const deleteNoteBtn = document.querySelectorAll(".delete-note");
@@ -190,3 +446,36 @@ deleteNoteBtn.forEach((deleteBtn) => {
     }
   });
 });
+
+// mobile screee pop up
+
+const smallScreenPopUp = document.getElementById("mobile-screen-display");
+const displaySmallScreenPopup = document.getElementById("small-screen-bar");
+const hideSmallScreenPopup = document.getElementById("close-pop-up-icon");
+
+const smallNightMode = document.getElementById("small-night-mode");
+const smallDayMode = document.getElementById("small-day-mode");
+
+displaySmallScreenPopup.addEventListener("click", function () {
+  smallScreenPopUp.style.right = "0px";
+  hideSmallScreenPopup.addEventListener("click", function () {
+    smallScreenPopUp.style.right = "-20000px";
+  });
+});
+
+smallDayMode.addEventListener("click", function () {
+  smallChangeBodyBackground();
+});
+
+smallNightMode.addEventListener("click", function () {
+  smallChangeBodyBackground();
+});
+
+function smallChangeBodyBackground() {
+  smallDayMode.style.display =
+    smallDayMode.style.display === "none" ? "inline-block" : "none";
+  smallNightMode.style.display =
+    smallNightMode.style.display === "none" ? "inline-block" : "none";
+  bodyElement.classList.toggle("changeBackground");
+  
+}

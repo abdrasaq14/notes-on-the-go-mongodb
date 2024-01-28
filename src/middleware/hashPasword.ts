@@ -1,7 +1,7 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
-const SECRET = 'EVOLENO_REST_API'
-export const random = () => crypto.randomBytes(128).toString('base64');
+const SECRET = "EVOLENO_REST_API";
+export const random = () => crypto.randomBytes(128).toString("base64");
 export const hashPaswordAndConfirm = (salt: string, password: string) => {
-    return crypto.createHmac('sha256', [salt, password].join('/')).update(SECRET).digest('hex')
- }
+	return crypto.createHmac("sha256", [salt, password].join("/")).update(SECRET).digest("hex");
+};

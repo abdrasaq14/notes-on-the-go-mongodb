@@ -86,13 +86,13 @@ email_input.addEventListener("blur", function (e) {
 });
 phone_input.addEventListener("blur", function (e) {
   e.preventDefault();
-  const minLength = 6;
-  if (phone_input.value.length < minLength || phone_input.value.length > 15) {
+
+  if (phone_input.value.length < 14 || phone_input.value.length > 14) {
     phone_error.style.display = "block";
     phone_error_icon.style.setProperty("display", "block", "important");
     phone_confirm_icon.style.setProperty("display", "none", "important");
     check_phone = false;
-  } else if (phone_input.value.length >= minLength) {
+  } else if (phone_input.value.length === 14) {
     phone_error.style.display = "none";
     phone_error_icon.style.setProperty("display", "none", "important");
     phone_confirm_icon.style.setProperty("display", "block", "important");

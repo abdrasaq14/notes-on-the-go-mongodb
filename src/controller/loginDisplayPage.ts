@@ -1,9 +1,5 @@
-import express, { Request, Response, NextFunction } from "express";
+import { type Response, type Request} from "express";
 
-export function loginDisplayPage(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  res.render("login", {});
+export function loginDisplayPage(req: Request, res: Response) {
+	res.render("login", {});
 }

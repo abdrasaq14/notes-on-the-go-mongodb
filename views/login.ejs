@@ -19,7 +19,7 @@
   </head>
   <body>
     <div id="pop-up-message-wrapper"></div>
-    <form action="/users/login" method="post" id="login-form">
+    <form id="login-form">
       <div class="form-wrapper">
         <div class="existing-note-wrapper">
           <h1 class="existing-note">Login</h1>
@@ -71,6 +71,11 @@
         <div class="btn-wrapper">
           <button  class="submit-btn" submit">Login</button>
         </div>
+        <p class="login-link-text">
+              Don't have an account? click
+              <a class="login-link" href="/users/signup">Here</a>
+              <span> to signup</span>
+            </p>
       </div>
     </form>
     <script src="/js/login.js"></script>

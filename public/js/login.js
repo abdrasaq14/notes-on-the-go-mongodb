@@ -64,7 +64,7 @@ form.addEventListener("submit", async function (event) {
         setTimeout(() => {
           displayPopUpMessage.style.animation =
             "slide-out 1s ease-in-out backwards";
-        }, 4000);
+        }, 2000);
         const closeBtn = document.querySelector(".close-text");
         closeBtn.addEventListener("click", function () {
           displayPopUpMessage.classList.remove("after-success");
@@ -132,7 +132,7 @@ form.addEventListener("submit", async function (event) {
         </div>
         <div class="message-wrapper">
           <h2 class="success-message">Error</h2>
-          <p class="display-pop-up-message">Unable to create account</p>
+          <p class="display-pop-up-message">Internal Server Error</p>
         </div>
         <div class="close-wrapper">
           <p class="close-text">CLOSE</p>

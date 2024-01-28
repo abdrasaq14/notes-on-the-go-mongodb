@@ -67,7 +67,7 @@ body {
   height: 5px;
   width: 100%;
   background-color: #00af72;
-  animation: animateAfter 4s forwards;
+  animation: animateAfter 1500ms forwards;
 }
 .after-error::after {
   content: "";
@@ -145,10 +145,6 @@ body {
   color: #b2b2b2;
 }
 
-#display-pop-up-message {
-  text-wrap: wrap;
-}
-
 .close-wrapper:hover {
   background-color: #ebebeb;
 }
@@ -161,13 +157,25 @@ form {
   background-color: #fff;
   box-shadow: 15px 15px 15px #042551ae;
   min-height: 65%;
-  width: 35%;
+  width: 70%;
+  max-width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
   border-radius: 20px;
+  @media all and (min-width: 600px) {
+    width: 55%;
+  }
+  @media all and (min-width: 768px) {
+    width: 45%;
+  }
+  @media all and (min-width: 1000px) {
+    width: 40%;
+    max-width: 35%;
+    min-width: 30%;
+  }
 }
 .form-wrapper {
   width: 100%;
@@ -240,7 +248,7 @@ input::placeholder {
   font-size: 1.2rem;
   margin-left: 0;
   font-weight: 700;
-  padding: 1.5rem 1.6rem;
+  padding: 1rem;
   background: linear-gradient(to bottom, rgb(40, 4, 81), rgba(4, 38, 81));
 }
 
@@ -305,7 +313,18 @@ input::placeholder {
   border-radius: 50px;
 }
 
+.login-link-text {
+  color: #042651;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 700;
+  @media all and (min-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
 .login-link {
-  color: rgb(255, 247, 0);
+  color: rgb(255, 196, 0);
   text-decoration: none;
 }

@@ -1,9 +1,8 @@
-import express, { Request, Response, NextFunction } from "express";
+import { Request, Response} from "express";
 
 export default function signupPage(
-  req: Request,
-  res: Response,
-  next: NextFunction
+	req: Request,
+	res: Response,
 ) {
-  res.render("signup", {});
+	res.render("signup", {});
 }

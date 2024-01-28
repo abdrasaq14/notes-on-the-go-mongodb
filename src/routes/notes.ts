@@ -1,10 +1,11 @@
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 import { isAuthenticated } from "../middleware/jwtAuthenticate";
 import {
-  getIndividualNoteFunction,
-  createNewNoteFunction,
-  deleteNoteFunction,
-  putNewNoteFunction,
+	getIndividualNoteFunction,
+	createNewNoteFunction,
+	deleteNoteFunction,
+	putNewNoteFunction,
+	getAllNotesFunction,
 } from "../controller/noteController";
 import { noCache } from "../middleware/no-catching";
 
@@ -12,13 +13,13 @@ import { noCache } from "../middleware/no-catching";
 const router = express.Router();
 
 /* GET NOTES listing. */
-//router.get("/", getNoteFunction);
+router.get("/", getAllNotesFunction);
 
-// router.get("/login", getNoteFunction);
-router.get("/dashboard", isAuthenticated, noCache, getIndividualNoteFunction);
-router.post("/dashboard", isAuthenticated, getIndividualNoteFunction);
-router.post("/dashboard/edit", isAuthenticated, putNewNoteFunction);
-router.post("/dashboard/add-new-note", isAuthenticated, createNewNoteFunction);
-router.post("/dashboard/delete-note", isAuthenticated, deleteNoteFunction);
+router.use(isAuthenticated);
+router.get("/dashboard", noCache, getIndividualNoteFunction);
+router.post("/dashboard", getIndividualNoteFunction);
+router.post("/dashboard/edit", putNewNoteFunction);
+router.post("/dashboard/add-new-note", createNewNoteFunction);
+router.post("/dashboard/delete-note", deleteNoteFunction);
 // updating new notes
 export default router;
