@@ -16,10 +16,17 @@ body {
   font-family: var(--main-font);
   font-weight: 500;
   font-size: 0.9rem;
-  min-height: 100vh;
   color: var(--main-color);
+  overflow: hidden;
+  display: flex;
+
+  flex-direction: column;
 }
 
+main {
+  flex: 1;
+  min-height: 100vh;
+}
 .changeBackground {
   background-color: var(--main-color);
   color: #ffff;
@@ -499,18 +506,20 @@ footer {
 
 ul {
   list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   margin-top: 2rem !important;
-  width: 100%;
+  width: 95%;
+  overflow: visible;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
 }
 
 li {
-  width: 20rem;
-  height: 20rem;
+  aspect-ratio: 1/1.1;
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -526,6 +535,9 @@ li {
   background-repeat: no-repeat;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  @media all and (min-width: 2500px) {
+    aspect-ratio: 1/1;
+  }
 }
 .note-title-wrapper {
   color: #ffff;

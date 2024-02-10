@@ -39,263 +39,276 @@
       </div>
     </header>
 
-    <div id="pop-up-message-wrapper"></div>
+    <main>
+      <div id="pop-up-message-wrapper"></div>
 
-    <div class="body-wrapper">
-      <div class="inner-wrapper">
-        <h1 class="welcome-text">
-          Hi,
-          <span class="user-name-text"><%= userDetail.fullname %></span
-          ><span class="exclamation">,</span>
-        </h1>
+      <div class="body-wrapper">
+        <div class="inner-wrapper">
+          <h1 class="welcome-text">
+            Hi,
+            <span class="user-name-text"><%= userDetail.fullname %></span
+            ><span class="exclamation">,</span>
+          </h1>
 
-        <% if (individualNotes.length === 0) { %>
-        <p class="no-note-length">
-          Your note list is empty, kindly click on the button below to create
-          one.
-        </p>
+          <% if (individualNotes.length === 0) { %>
+          <p class="no-note-length">
+            Your note list is empty, kindly click on the button below to create
+            one.
+          </p>
+          <% } %>
+
+          <button id="add-new-notes">
+            <i class="fa-solid fa-plus plus-icon"></i> Click to add new note
+          </button>
+        </div>
+        <% if (individualNotes.length >= 1) { %>
+        <div class="existing-note-wrapper">
+          <h1 class="existing-note">Your Notes</h1>
+          <img
+            src="/img/curve.png"
+            alt=""
+            class="existing-note-img"
+            srcset=""
+          />
+        </div>
         <% } %>
 
-        <button id="add-new-notes">
-          <i class="fa-solid fa-plus plus-icon"></i> Click to add new note
-        </button>
+        <ul>
+          <% individualNotes.forEach(function(note) { %>
+          <li>
+            <div class="note-title-wrapper">
+              <h2><%= note.title %></h2>
+            </div>
+
+            <div class="note-body-wrapper">
+              <p class="note-description">
+                <strong>Description:</strong> <%= note.description %>
+              </p>
+              <p class="note-status">
+                <strong>Status:</strong> <%= note.status %>
+              </p>
+              <p class="note-due-date">
+                <strong>Due Date:</strong> <%= note.due_date %>
+              </p>
+            </div>
+
+            <div class="edit-and-delete-button-wrapper">
+              <button
+                class="edit-notes"
+                data-note="<%= JSON.stringify(note) %>"
+              >
+                <i class="fa-solid fa-pen-to-square"></i> Edit Note
+              </button>
+              <button
+                class="delete-note"
+                data-note="<%= JSON.stringify(note) %>"
+              >
+                <i class="fa-solid fa-trash"></i> Delete Note
+              </button>
+            </div>
+          </li>
+          <% }); %>
+        </ul>
       </div>
-      <% if (individualNotes.length >= 1) { %>
-      <div class="existing-note-wrapper">
-        <h1 class="existing-note">Your Notes</h1>
-        <img src="/img/curve.png" alt="" class="existing-note-img" srcset="" />
-      </div>
-      <% } %>
-
-      <ul>
-        <% individualNotes.forEach(function(note) { %>
-        <li>
-          <div class="note-title-wrapper">
-            <h2><%= note.title %></h2>
-          </div>
-
-          <div class="note-body-wrapper">
-            <p class="note-description">
-              <strong>Description:</strong> <%= note.description %>
-            </p>
-            <p class="note-status">
-              <strong>Status:</strong> <%= note.status %>
-            </p>
-            <p class="note-due-date">
-              <strong>Due Date:</strong> <%= note.due_date %>
-            </p>
-          </div>
-
-          <div class="edit-and-delete-button-wrapper">
-            <button class="edit-notes" data-note="<%= JSON.stringify(note) %>">
-              <i class="fa-solid fa-pen-to-square"></i> Edit Note
-            </button>
-            <button class="delete-note" data-note="<%= JSON.stringify(note) %>">
-              <i class="fa-solid fa-trash"></i> Delete Note
-            </button>
-          </div>
-        </li>
-        <% }); %>
-      </ul>
-    </div>
-    <div id="each-note-display">
-      <form
-        id="edit-note-form"
-        action="/notes/dashboard/edit"
-        enctype="application/x-www-form-urlencoded"
-      >
-        <input type="hidden" id="noteId" name="noteId" />
-        <fieldset>
-          <label for="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            required
-            placeholder="Enter the note title here"
-            value=""
-          />
-        </fieldset>
-
-        <fieldset class="description-textarea-wrapper">
-          <label for="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            class="description-textarea"
-            placeholder="Enter the note description here"
-          ></textarea>
-        </fieldset>
-
-        <fieldset>
-          <label for="dueDate">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate"
-            name="due_date"
-            placeholder="Enter the due date e.g 24th of August, 2023"
-          />
-        </fieldset>
-
-        <fieldset class="status-option-label">
-          <label for="status" class="status-label">Status:</label>
-          <div class="status-option-wrapper">
-            <input
-              type="radio"
-              id="statusConfirmed"
-              class="status-input"
-              name="status"
-              value="Confirmed"
-              required
-            />
-            <label for="status-confirmed" class="status-confirmed"
-              >Confirmed</label
-            >
-          </div>
-
-          <div class="status-option-wrapper">
-            <input
-              type="radio"
-              id="statusPending"
-              class="status-input"
-              name="status"
-              value="Pending"
-              required
-            />
-            <label for="status-pending" class="status-pending">Pending</label>
-          </div>
-        </fieldset>
-
-        <div class="button-wrapper">
-          <button class="submit-btn" type="submit">
-            <span class="save-btn-icon">
-              <i class="fa-solid fa-floppy-disk"></i>
-            </span>
-            <span class="save-btn-text"> Save note </span>
-          </button>
-          <button class="cancel-btn">
-            <span class="cancel-btn-icon">
-              <i class="fa-solid fa-left-long"></i>
-            </span>
-            <span class="cancel-btn-text"> Cancel Edit </span>
-          </button>
-        </div>
-      </form>
-    </div>
-    <div id="add-new-note-pop-up">
-      <form
-        id="add-course-form"
-        method="post"
-        enctype="application/x-www-form-urlencoded"
-      >
-        <fieldset>
-          <label for="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            required
-            placeholder="Enter the note title here"
-          />
-        </fieldset>
-
-        <fieldset class="description-textarea-wrapper">
-          <label for="description">Description:</label>
-          <textarea
-            id="description"
-            name="description"
-            class="description-textarea"
-            placeholder="Enter the note description here"
-          ></textarea>
-        </fieldset>
-        <fieldset>
-          <label for="dueDate">Due Date:</label>
-          <input
-            type="date"
-            id="dueDate"
-            name="due_date"
-            placeholder="Enter the due date e.g 24th of August, 2023"
-          />
-        </fieldset>
-
-        <fieldset class="status-option-label">
-          <label for="status" class="status-label">Status:</label>
-          <div class="status-option-wrapper">
-            <input
-              type="radio"
-              id="status-confirmed"
-              class="status-input"
-              name="status"
-              value="Confirmed"
-              required
-            />
-            <label for="status-confirmed" class="status-confirmed"
-              >Confirmed</label
-            >
-          </div>
-
-          <div class="status-option-wrapper">
-            <input
-              type="radio"
-              id="status-pending"
-              class="status-input"
-              name="status"
-              value="Pending"
-              required
-            />
-            <label for="status-pending" class="status-pending">Pending</label>
-          </div>
-        </fieldset>
-
-        <div class="button-wrapper">
-          <button class="submit-btn" type="submit">
-            <span class="save-btn-icon">
-              <i class="fa-solid fa-floppy-disk"></i>
-            </span>
-            <span class="save-btn-text"> Save note </span>
-          </button>
-          <button class="cancel-btn">
-            <span class="cancel-btn-icon">
-              <i class="fa-solid fa-left-long"></i>
-            </span>
-            <span class="cancel-btn-text"> Cancel </span>
-          </button>
-        </div>
-      </form>
-    </div>
-
-    <div id="delete-note-pop-up">
-      <div class="delete-btn-wrapper">
-        <p class="are-you-sure">Are you sure you want to delete</p>
-        <div class="confirm-cancel-btn-wrapper">
-          <button class="confirm-btn">Yes</button>
-          <button class="cancel-btn no">No</button>
-        </div>
-      </div>
-    </div>
-    <!-- mobile screeen pop up -->
-    <div id="mobile-screen-display">
-      <div class="top-icon-wrapper">
-        <i class="fa-solid fa-x close-pop-up-icon" id="close-pop-up-icon"></i>
-        <div class="night-day-icon-wrapper">
-          <i
-            class="fa-solid fa-moon small-night-mode"
-            id="small-night-mode"
-          ></i>
-          <i class="fa-solid fa-sun small-day-mode" id="small-day-mode"></i>
-        </div>
-      </div>
-
-      <div class="other-part-wrapper">
-        <a class="users-home" href="/notes/dashboard"
-          ><i class="fa-solid fa-house"></i> Home</a
+      <div id="each-note-display">
+        <form
+          id="edit-note-form"
+          action="/notes/dashboard/edit"
+          enctype="application/x-www-form-urlencoded"
         >
-        <a class="users-sign-out" onclick="clearCookieAndRedirect()"
-          ><i class="fa-solid fa-right-from-bracket sign-out-icon"></i> Sign
-          out</a
-        >
+          <input type="hidden" id="noteId" name="noteId" />
+          <fieldset>
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              placeholder="Enter the note title here"
+              value=""
+            />
+          </fieldset>
+
+          <fieldset class="description-textarea-wrapper">
+            <label for="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              class="description-textarea"
+              placeholder="Enter the note description here"
+            ></textarea>
+          </fieldset>
+
+          <fieldset>
+            <label for="dueDate">Due Date:</label>
+            <input
+              type="date"
+              id="dueDate"
+              name="due_date"
+              placeholder="Enter the due date e.g 24th of August, 2023"
+            />
+          </fieldset>
+
+          <fieldset class="status-option-label">
+            <label for="status" class="status-label">Status:</label>
+            <div class="status-option-wrapper">
+              <input
+                type="radio"
+                id="statusConfirmed"
+                class="status-input"
+                name="status"
+                value="Confirmed"
+                required
+              />
+              <label for="status-confirmed" class="status-confirmed"
+                >Confirmed</label
+              >
+            </div>
+
+            <div class="status-option-wrapper">
+              <input
+                type="radio"
+                id="statusPending"
+                class="status-input"
+                name="status"
+                value="Pending"
+                required
+              />
+              <label for="status-pending" class="status-pending">Pending</label>
+            </div>
+          </fieldset>
+
+          <div class="button-wrapper">
+            <button class="submit-btn" type="submit">
+              <span class="save-btn-icon">
+                <i class="fa-solid fa-floppy-disk"></i>
+              </span>
+              <span class="save-btn-text"> Save note </span>
+            </button>
+            <button class="cancel-btn">
+              <span class="cancel-btn-icon">
+                <i class="fa-solid fa-left-long"></i>
+              </span>
+              <span class="cancel-btn-text"> Cancel Edit </span>
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
+      <div id="add-new-note-pop-up">
+        <form
+          id="add-course-form"
+          method="post"
+          enctype="application/x-www-form-urlencoded"
+        >
+          <fieldset>
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              placeholder="Enter the note title here"
+            />
+          </fieldset>
+
+          <fieldset class="description-textarea-wrapper">
+            <label for="description">Description:</label>
+            <textarea
+              id="description"
+              name="description"
+              class="description-textarea"
+              placeholder="Enter the note description here"
+            ></textarea>
+          </fieldset>
+          <fieldset>
+            <label for="dueDate">Due Date:</label>
+            <input
+              type="date"
+              id="dueDate"
+              name="due_date"
+              placeholder="Enter the due date e.g 24th of August, 2023"
+            />
+          </fieldset>
+
+          <fieldset class="status-option-label">
+            <label for="status" class="status-label">Status:</label>
+            <div class="status-option-wrapper">
+              <input
+                type="radio"
+                id="status-confirmed"
+                class="status-input"
+                name="status"
+                value="Confirmed"
+                required
+              />
+              <label for="status-confirmed" class="status-confirmed"
+                >Confirmed</label
+              >
+            </div>
+
+            <div class="status-option-wrapper">
+              <input
+                type="radio"
+                id="status-pending"
+                class="status-input"
+                name="status"
+                value="Pending"
+                required
+              />
+              <label for="status-pending" class="status-pending">Pending</label>
+            </div>
+          </fieldset>
+
+          <div class="button-wrapper">
+            <button class="submit-btn" type="submit">
+              <span class="save-btn-icon">
+                <i class="fa-solid fa-floppy-disk"></i>
+              </span>
+              <span class="save-btn-text"> Save note </span>
+            </button>
+            <button class="cancel-btn">
+              <span class="cancel-btn-icon">
+                <i class="fa-solid fa-left-long"></i>
+              </span>
+              <span class="cancel-btn-text"> Cancel </span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div id="delete-note-pop-up">
+        <div class="delete-btn-wrapper">
+          <p class="are-you-sure">Are you sure you want to delete</p>
+          <div class="confirm-cancel-btn-wrapper">
+            <button class="confirm-btn">Yes</button>
+            <button class="cancel-btn no">No</button>
+          </div>
+        </div>
+      </div>
+      <!-- mobile screeen pop up -->
+      <div id="mobile-screen-display">
+        <div class="top-icon-wrapper">
+          <i class="fa-solid fa-x close-pop-up-icon" id="close-pop-up-icon"></i>
+          <div class="night-day-icon-wrapper">
+            <i
+              class="fa-solid fa-moon small-night-mode"
+              id="small-night-mode"
+            ></i>
+            <i class="fa-solid fa-sun small-day-mode" id="small-day-mode"></i>
+          </div>
+        </div>
+
+        <div class="other-part-wrapper">
+          <a class="users-home" href="/notes/dashboard"
+            ><i class="fa-solid fa-house"></i> Home</a
+          >
+          <a class="users-sign-out" onclick="clearCookieAndRedirect()"
+            ><i class="fa-solid fa-right-from-bracket sign-out-icon"></i> Sign
+            out</a
+          >
+        </div>
+      </div>
+    </main>
     <footer>
       <p class="footer-text">
         &copy; Abdulrasaq Designs | All rights reserved.

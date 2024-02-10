@@ -120,8 +120,6 @@ new_password_input.addEventListener("blur", function (e) {
       "important"
     );
     check_password = true;
-
-    console.log("currentPassword", currentPassword);
   }
   updateButtonState();
 });

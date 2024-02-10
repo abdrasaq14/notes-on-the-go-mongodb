@@ -104,7 +104,7 @@ editBtn.forEach((btn) => {
         },
         body: new URLSearchParams(formData),
       });
-      console.log("response", response);
+
       if (response.ok) {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
@@ -231,30 +231,6 @@ editBtn.forEach((btn) => {
     });
   });
 });
-// closing the edit note pop up
-
-// Handle form submission
-
-// async function submitForm(formDataObject) {
-//   // Make a POST request using Fetch API
-
-//   fetch("/notes/dashboard/edit", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(formDataObject),
-//     credentials: "include",
-//   })
-//     .then((response) => response.json())
-//     .then((data) => {
-//       // closing the pop up
-//       popup.style.display = "none";
-//       // referesh the page to see updates
-//       location.reload();
-//     })
-//     .catch((error) => console.error("Error:", error));
-// }
 
 // add new btn event listener
 const addNewNoteBtn = document.getElementById("add-new-notes");
@@ -418,7 +394,6 @@ deleteNoteBtn.forEach((deleteBtn) => {
       const cancelButton = document.querySelector(".no");
       const noteData = JSON.parse(deleteBtn.dataset.note);
       const noteid = noteData._id;
-      console.log("noteid", noteid);
       deletePopUp.style.display = "flex";
       cancelButton.addEventListener("click", function () {
         deletePopUp.style.display = "none";
@@ -441,9 +416,7 @@ deleteNoteBtn.forEach((deleteBtn) => {
 
         //console.log(result); // Log the result (optional)
       });
-    } catch (error) {
-      console.error("Error deleting note:", error);
-    }
+    } catch (error) {}
   });
 });
 
@@ -477,5 +450,4 @@ function smallChangeBodyBackground() {
   smallNightMode.style.display =
     smallNightMode.style.display === "none" ? "inline-block" : "none";
   bodyElement.classList.toggle("changeBackground");
-  
 }

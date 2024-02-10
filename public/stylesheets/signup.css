@@ -148,9 +148,8 @@ body {
 }
 
 body {
-  min-height: 100vh;
-  max-height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+
   font-family: "Nunito", sans-serif;
   color: #fff;
 
@@ -160,10 +159,8 @@ body {
 .body-wrapper {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  /* background-color: rgba(4, 38, 81); */
-  overflow-y: hidden;
 
-  @media all and (min-width: 768px) {
+  @media all and (min-width: 1000px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
 
@@ -187,7 +184,7 @@ body {
   min-height: 100vh !important;
   display: none;
 
-  @media all and (min-width: 768px) {
+  @media all and (min-width: 1000px) {
     max-height: 100vh !important;
     display: flex;
     flex-direction: column;
@@ -206,8 +203,6 @@ body {
 form {
   background-color: #fff;
   min-height: 100vh;
-  max-height: 100vh;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -218,21 +213,21 @@ form {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
+  @media all and (min-width: 768px) {
+    width: 65%;
+  }
 }
 .back-to-homepage-link {
   color: var(--main-color);
   text-decoration: none;
 }
-.go-home-icon{
-  margin-right: .5rem;
+.go-home-icon {
+  margin-right: 0.5rem;
 }
 .form-wrapper {
-  min-height: 85%;
-  max-height: 100%;
-  height: 100%;
-  min-width: 85%;
-  max-width: 85%;
+  height: 80%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -240,32 +235,16 @@ form {
   justify-content: center;
   overflow-y: visible;
   background-color: #d9e5f56b;
-
-  @media all and (min-width: 360px) {
-    min-height: 85%;
-    max-height: 85%;
-  }
   @media all and (min-width: 768px) {
-    min-height: 75%;
-    max-height: 75%;
-    height: 75%;
-  }
-  @media all and (min-width: 1000px) {
-    min-height: 85%;
-    max-height: 85%;
-    height: 85%;
+    width: 65%;
+    padding: 2rem;
   }
 }
 
 .form-wrapper-inner {
-  min-height: 75%;
-  max-height: 75%;
-  height: 75%;
-  max-width: 100%;
-  min-width: 100%;
-  width: 100%;
   display: flex;
-
+  height: 100%;
+  width: 100%;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
@@ -274,6 +253,9 @@ form {
 .field-wrapper {
   width: 100%;
   margin: 0;
+  @media all and (min-width: 1000px) {
+    margin-bottom: 1rem;
+  }
 }
 .btn-already-have-account-wrapper {
   min-height: 20%;
@@ -462,7 +444,7 @@ input::placeholder {
 }
 
 .login-link-text {
-  color: #042651;
+  color: #474c52;
   margin-top: 1rem;
   text-align: center;
   font-weight: 700;

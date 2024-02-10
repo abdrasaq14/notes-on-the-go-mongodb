@@ -14,6 +14,10 @@ body {
   color: #fff;
   background-image: linear-gradient(to bottom, rgba(4, 38, 81), rgb(40, 4, 81));
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #pop-up-message-wrapper {
@@ -21,7 +25,8 @@ body {
   align-items: stretch;
   justify-content: space-between;
   min-height: 2rem;
-  width: 25vw;
+  min-width: 20vw;
+  max-width: 450px;
   border-radius: 8px;
   overflow-y: hidden;
   box-sizing: content-box;
@@ -33,6 +38,9 @@ body {
   top: 5%;
   right: 0;
   z-index: 10000;
+  @media screen and (max-width: 623px) {
+    width: 60%;
+  }
 }
 
 @keyframes animateMe {
@@ -150,31 +158,20 @@ body {
 }
 
 form {
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
   background-color: #fff;
   box-shadow: 15px 15px 15px #042551ae;
-  min-height: 65%;
-  width: 70%;
-  max-width: 70%;
+  height: 65%;
+  max-width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem 2rem;
   border-radius: 20px;
-  @media all and (min-width: 600px) {
-    width: 55%;
-  }
   @media all and (min-width: 768px) {
-    width: 45%;
-  }
-  @media all and (min-width: 1000px) {
-    width: 40%;
-    max-width: 35%;
+    padding: 2.2rem 2rem;
     min-width: 30%;
+    max-width: 60rem;
   }
 }
 .form-wrapper {
@@ -314,7 +311,7 @@ input::placeholder {
 }
 
 .login-link-text {
-  color: #042651;
+  color: #474c52;
   font-size: 0.9rem;
   margin-top: 1rem;
   text-align: center;
