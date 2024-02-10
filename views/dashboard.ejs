@@ -16,25 +16,30 @@
 
   <body id="body">
     <header id="header">
-      <div class="left-icon">
-        <img src="/img/note-icon.png" alt="" srcset="" />
-        <a class="left-icon-text" href="/notes/dashboard">NOTES ON THE GO!</a>
-      </div>
-      <div class="search-icon-wrapper">
-        <input type="text" placeholder="Search Note" class="search-input" />
-      </div>
+      <div class="header-inner">
+        <div class="left-icon">
+          <img src="/img/note-icon.png" alt="" srcset="" />
+          <a class="left-icon-text" href="/notes/dashboard">NOTES ON THE GO!</a>
+        </div>
+        <div class="search-icon-wrapper">
+          <input type="text" placeholder="Search Note" class="search-input" />
+        </div>
 
-      <div class="right-btn-wrapper">
-        <i class="fa-solid fa-bars small-screen-bar" id="small-screen-bar"></i>
-        <a class="sign-out-text" onclick="clearCookieAndRedirect()"
-          >Sign out
-          <span class="sign-out-wrapper">
-            <i class="fa-solid fa-right-from-bracket sign-out-icon"></i>
-          </span>
-        </a>
-        <div class="day-night-mode-wrapper">
-          <i class="fa-solid fa-moon night-mode" id="night-mode"></i>
-          <i class="fa-solid fa-sun day-mode" id="day-mode"></i>
+        <div class="right-btn-wrapper">
+          <i
+            class="fa-solid fa-bars small-screen-bar"
+            id="small-screen-bar"
+          ></i>
+          <a class="sign-out-text" onclick="clearCookieAndRedirect()"
+            >Sign out
+            <span class="sign-out-wrapper">
+              <i class="fa-solid fa-right-from-bracket sign-out-icon"></i>
+            </span>
+          </a>
+          <div class="day-night-mode-wrapper">
+            <i class="fa-solid fa-moon night-mode" id="night-mode"></i>
+            <i class="fa-solid fa-sun day-mode" id="day-mode"></i>
+          </div>
         </div>
       </div>
     </header>
@@ -42,74 +47,62 @@
     <main>
       <div id="pop-up-message-wrapper"></div>
 
-      <div class="body-wrapper">
-        <div class="inner-wrapper">
-          <h1 class="welcome-text">
-            Hi,
-            <span class="user-name-text"><%= userDetail.fullname %></span
-            ><span class="exclamation">,</span>
-          </h1>
+      <div class="inner-wrapper">
+        <h1 class="welcome-text">
+          Hi,
+          <span class="user-name-text"><%= userDetail.fullname %></span
+          ><span class="exclamation">,</span>
+        </h1>
 
-          <% if (individualNotes.length === 0) { %>
-          <p class="no-note-length">
-            Your note list is empty, kindly click on the button below to create
-            one.
-          </p>
-          <% } %>
-
-          <button id="add-new-notes">
-            <i class="fa-solid fa-plus plus-icon"></i> Click to add new note
-          </button>
-        </div>
-        <% if (individualNotes.length >= 1) { %>
-        <div class="existing-note-wrapper">
-          <h1 class="existing-note">Your Notes</h1>
-          <img
-            src="/img/curve.png"
-            alt=""
-            class="existing-note-img"
-            srcset=""
-          />
-        </div>
+        <% if (individualNotes.length === 0) { %>
+        <p class="no-note-length">
+          Your note list is empty, kindly click on the button below to create
+          one.
+        </p>
         <% } %>
 
-        <ul>
-          <% individualNotes.forEach(function(note) { %>
-          <li>
-            <div class="note-title-wrapper">
-              <h2><%= note.title %></h2>
-            </div>
-
-            <div class="note-body-wrapper">
-              <p class="note-description">
-                <strong>Description:</strong> <%= note.description %>
-              </p>
-              <p class="note-status">
-                <strong>Status:</strong> <%= note.status %>
-              </p>
-              <p class="note-due-date">
-                <strong>Due Date:</strong> <%= note.due_date %>
-              </p>
-            </div>
-
-            <div class="edit-and-delete-button-wrapper">
-              <button
-                class="edit-notes"
-                data-note="<%= JSON.stringify(note) %>"
-              >
-                <i class="fa-solid fa-pen-to-square"></i> Edit Note
-              </button>
-              <button
-                class="delete-note"
-                data-note="<%= JSON.stringify(note) %>"
-              >
-                <i class="fa-solid fa-trash"></i> Delete Note
-              </button>
-            </div>
-          </li>
-          <% }); %>
-        </ul>
+        <button id="add-new-notes">
+          <i class="fa-solid fa-plus plus-icon"></i> Click to add new note
+        </button>
       </div>
+      <% if (individualNotes.length >= 1) { %>
+      <div class="existing-note-wrapper">
+        <h1 class="existing-note">Your Notes</h1>
+        <img src="/img/curve.png" alt="" class="existing-note-img" srcset="" />
+      </div>
+      <% } %>
+
+      <ul>
+        <% individualNotes.forEach(function(note) { %>
+        <li>
+          <div class="note-title-wrapper">
+            <h2><%= note.title %></h2>
+          </div>
+
+          <div class="note-body-wrapper">
+            <p class="note-description">
+              <strong>Description:</strong> <%= note.description %>
+            </p>
+            <p class="note-status">
+              <strong>Status:</strong> <%= note.status %>
+            </p>
+            <p class="note-due-date">
+              <strong>Due Date:</strong> <%= note.due_date %>
+            </p>
+          </div>
+
+          <div class="edit-and-delete-button-wrapper">
+            <button class="edit-notes" data-note="<%= JSON.stringify(note) %>">
+              <i class="fa-solid fa-pen-to-square"></i> <span>Edit Note</span>
+            </button>
+            <button class="delete-note" data-note="<%= JSON.stringify(note) %>">
+              <i class="fa-solid fa-trash"></i> <span>Delete Note</span>
+            </button>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+
       <div id="each-note-display">
         <form
           id="edit-note-form"

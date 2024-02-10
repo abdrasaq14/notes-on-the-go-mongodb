@@ -18,14 +18,19 @@ body {
   font-size: 0.9rem;
   color: var(--main-color);
   overflow: hidden;
-  display: flex;
-
-  flex-direction: column;
 }
 
 main {
-  flex: 1;
-  min-height: 100vh;
+  padding: 0 2rem;
+  @media all and (min-width: 1500px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+}
+.body-wrapper {
+  background-color: red;
 }
 .changeBackground {
   background-color: var(--main-color);
@@ -34,17 +39,30 @@ main {
 
 header {
   display: flex;
-  position: relative;
-  flex-direction: row;
-  height: 6rem;
+  height: 5rem;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 2rem;
-
-  box-shadow: 0px 8px 25px #000c1bce;
+  width: 100%;
+  margin-top: 0;
+  padding: 0 2rem;
   background-color: rgba(4, 38, 81);
+  box-shadow: 0px 8px 25px #000000ba;
 }
-
+.header-inner {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  overflow: hidden;
+  justify-content: space-between;
+  overflow-x: hidden;
+  @media all and (min-width: 1500px) {
+    display: flex;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+}
 footer {
   display: flex;
   height: 4rem;
@@ -77,7 +95,6 @@ footer {
   min-width: 70%;
   width: 70%;
   max-width: 70%;
-  padding-left: 2rem;
 
   @media all and (min-width: 768px) {
     min-width: 40%;
@@ -157,7 +174,6 @@ footer {
 .right-btn-wrapper {
   display: flex;
   flex-direction: column;
-  padding-right: 2rem;
   justify-content: flex-end;
   align-items: flex-end;
   /* justify-content: flex-end;
@@ -446,11 +462,6 @@ footer {
   }
 }
 
-.body-wrapper {
-  width: 95%;
-  margin: 3.5rem auto;
-}
-
 #add-new-notes {
   background-color: #4caf50;
   padding: 0.8rem 2rem;
@@ -470,6 +481,7 @@ footer {
 }
 .welcome-text {
   font-weight: 900;
+  margin-top: 5rem;
   margin-bottom: 1rem;
 }
 
@@ -576,6 +588,7 @@ li:hover {
   justify-content: center;
   position: fixed;
   top: 0;
+  left: -5%;
   color: var(--main-color);
   z-index: 5000;
   background-color: rgba(25, 25, 25, 0.618);
@@ -599,8 +612,8 @@ li:hover {
 }
 form {
   background-color: #ffff;
-  width: 80%;
-  height: 90%;
+  min-width: 80%;
+  min-height: 70%;
   margin: auto;
   padding: 0.5rem 1rem;
   display: flex;
@@ -611,16 +624,13 @@ form {
   padding: 2rem;
   overflow-y: visible;
   @media all and (min-width: 768px) {
-    height: 60%;
-    width: 70%;
+    min-height: 70%;
+    max-width: 60%;
   }
   @media all and (min-width: 1000px) {
-    max-width: 40%;
+    max-width: 500px;
     min-width: 40%;
-    width: 40%;
     max-height: 80%;
-    min-height: 80%;
-    height: 80%;
   }
 }
 
@@ -718,6 +728,7 @@ input::placeholder {
   width: 100%;
   padding: 1rem;
   height: 30%;
+  overflow: hidden;
 }
 
 .button-wrapper {
@@ -725,7 +736,7 @@ input::placeholder {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
   height: 5rem;
   overflow: visible;
@@ -774,6 +785,14 @@ input::placeholder {
 .edit-notes {
   background-color: #062aac;
   font-size: 0.8rem;
+  overflow-y: visible;
+}
+.edit-notes span,
+.delete-note span {
+  display: none;
+  @media all and (min-width: 465px) {
+    display: inline-block;
+  }
 }
 .edit-notes:hover {
   background-color: #032086;
@@ -790,6 +809,7 @@ input::placeholder {
   background-color: rgb(203, 0, 0);
   transition: 0.5s;
   font-size: 0.8rem;
+  overflow-y: visible;
 }
 .cancel-btn:hover,
 .delete-note:hover {

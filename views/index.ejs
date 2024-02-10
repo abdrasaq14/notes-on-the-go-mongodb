@@ -17,68 +17,74 @@
   </head>
   <body id="body">
     <header id="header">
-      <div class="left-icon">
-        <img src="/img/note-icon.png" alt="" srcset="" />
-        <a class="left-icon-text" href="/">NOTES ON THE GO!</a>
-      </div>
-      <div class="right-btn-wrapper">
-        <i class="fa-solid fa-bars small-screen-bar" id="small-screen-bar"></i>
-        <i class="fa-solid fa-moon night-mode" id="night-mode"></i>
-        <i class="fa-solid fa-sun day-mode" id="day-mode"></i>
+      <div class="header-inner">
+        <div class="left-icon">
+          <img src="/img/note-icon.png" alt="" srcset="" />
+          <a class="left-icon-text" href="/">NOTES ON THE GO!</a>
+        </div>
+        <div class="right-btn-wrapper">
+          <i
+            class="fa-solid fa-bars small-screen-bar"
+            id="small-screen-bar"
+          ></i>
+          <i class="fa-solid fa-moon night-mode" id="night-mode"></i>
+          <i class="fa-solid fa-sun day-mode" id="day-mode"></i>
+        </div>
       </div>
     </header>
+    <main>
+      <div class="main-body-wrapper">
+        <div class="left-wrapper">
+          <h1 class="main-heading">
+            Create your
+            <span class="less"> Notes<br /></span>
+            on the go!
+          </h1>
+          <p class="description-text">
+            You don't have to take your notes everywhere you go, create one now
+            and access it anywhere.
+          </p>
 
-    <div class="main-body-wrapper">
-      <div class="left-wrapper">
-        <h1 class="main-heading">
-          Create your
-          <span class="less"> Notes<br /></span>
-          on the go!
-        </h1>
-        <p class="description-text">
-          You don't have to take your notes everywhere you go, create one now
-          and access it anywhere.
-        </p>
+          <div class="btn-wrapper">
+            <a class="sign-up-btn" href="/users/signup">Sign up</a>
+            <a class="login-btn" id="login-btn" href="/users/login">Login</a>
+          </div>
 
-        <div class="btn-wrapper">
-          <a class="sign-up-btn" href="/users/signup">Sign up</a>
-          <a class="login-btn" id="login-btn" href="/users/login">Login</a>
-        </div>
-
-        <!-- <div class="view-gallery-btn-wrapper">
+          <!-- <div class="view-gallery-btn-wrapper">
           <a class="view-gallery-btn" href="/notes">View notes</a>
         </div> -->
-      </div>
+        </div>
 
-      <div class="right-wrapper">
-        <img src="/img/second.png" alt="" srcset="" />
-      </div>
-    </div>
-
-    <div id="mobile-screen-display">
-      <div class="top-icon-wrapper">
-        <i class="fa-solid fa-x close-pop-up-icon" id="close-pop-up-icon"></i>
-        <div class="night-day-icon-wrapper">
-          <i
-            class="fa-solid fa-moon small-night-mode"
-            id="small-night-mode"
-          ></i>
-          <i class="fa-solid fa-sun small-day-mode" id="small-day-mode"></i>
+        <div class="right-wrapper">
+          <img src="/img/second.png" alt="" srcset="" />
         </div>
       </div>
 
-      <div class="other-part-wrapper">
-        <a class="users-sign-up" href="/users/signup"
-          ><i class="fa-solid fa-user-plus"></i> Sign up</a
-        >
-        <a class="users-login" href="/users/login"
-          ><i class="fa-solid fa-right-to-bracket"></i> Login</a
-        >
-        <!-- <a class="view-all-notes" href="/notes"
+      <div id="mobile-screen-display">
+        <div class="top-icon-wrapper">
+          <i class="fa-solid fa-x close-pop-up-icon" id="close-pop-up-icon"></i>
+          <div class="night-day-icon-wrapper">
+            <i
+              class="fa-solid fa-moon small-night-mode"
+              id="small-night-mode"
+            ></i>
+            <i class="fa-solid fa-sun small-day-mode" id="small-day-mode"></i>
+          </div>
+        </div>
+
+        <div class="other-part-wrapper">
+          <a class="users-sign-up" href="/users/signup"
+            ><i class="fa-solid fa-user-plus"></i> Sign up</a
+          >
+          <a class="users-login" href="/users/login"
+            ><i class="fa-solid fa-right-to-bracket"></i> Login</a
+          >
+          <!-- <a class="view-all-notes" href="/notes"
           ><i class="fa-solid fa-note-sticky"></i> View gallery</a
         > -->
+        </div>
       </div>
-    </div>
+    </main>
 
     <script src="/js/index.js"></script>
   </body>
