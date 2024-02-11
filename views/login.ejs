@@ -19,57 +19,77 @@
   </head>
   <body>
     <div id="pop-up-message-wrapper"></div>
-    <form id="login-form">
+<main>
+      <form id="login-form">
       <div class="form-wrapper">
         <div class="existing-note-wrapper">
           <h1 class="existing-note">Login</h1>
           <img src="/img/curve.png" alt="" class="existing-note-img" />
         </div>
 
-        <label for="email">Email:</label>
-        <div class="input-inline-btn-wrapper">
-          <i class="fa-regular fa-envelope input-icon"></i>
+<div class="field-wrapper">
+                <label for="email">Email:</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-regular fa-envelope input-icon"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="email-input input-style"
+                    placeholder="Enter your email"
+                    required
+                  />
+                  <i
+                    class="fa-solid fa-check input-status confirm-status email-confirm-input"
+                  ></i>
+                  <i
+                    class="fa-solid fa-x input-status wrong-status email-wrong-input"
+                  ></i>
+                </div>
 
-          <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-          class="inline-input"
-        />
-          
-          
-        </div>
-
-
-        <label for="password">Password:</label>
+                <span class="email-error password-error"
+                  >Enter a valid email</span
+                >
+              </div>
+<div class="field-wrapper">
+          <label for="password">Password:</label>
         
-        <div class="input-inline-btn-wrapper">
-          <i class="bx bx-lock-alt input-icon"></i>
+       <div class="password_wrapper">
+                  <div class="input-inline-btn-wrapper">
+                    <i class="bx bx-lock-alt input-icon"></i>
 
-          <input
-          type="password"
-          id="password"
-          name="password"
-          class="password inline-input"
-          placeholder="Enter your password"
-          required
-        />
-          
-          <button
-            type="button"
-            class="view-password-btn inline-icon"
-            onclick="togglePasswordVisibility(event, 'password', '.eye-icon', '.eye-slash-icon')"
-          >
-            <i class="fa-solid fa-eye eye-icon"></i>
-            <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
-          </button>
-        </div>
+                    <input
+                      type="password"
+                      class="new-password inline-input"
+                      name="password"
+                      id="password"
+                      placeholder="Enter your password"
+                      required
+                    />
+                    <i
+                      class="fa-solid fa-check input-status confirm-status password-confirm-input"
+                    ></i>
+                    <i
+                      class="fa-solid fa-x input-status wrong-status password-wrong-input"
+                    ></i>
+                    <button
+                      type="button"
+                      class="view-password-btn inline-icon"
+                      onclick="togglePasswordVisibility(event, 'password', '.eye-icon', '.eye-slash-icon')"
+                    >
+                      <i class="fa-solid fa-eye eye-icon"></i>
+                      <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
+                    </button>
+                  </div>
+                  <span class="new-password-error password-error"
+                    >Password must have a minimum of six (6) characters</span
+                  >
+                </div>
         
+</div>
 
         <div class="btn-wrapper">
-          <button  class="submit-btn" submit">Login</button>
+          <button class="submit-btn" submit">Login</button>
         </div>
         <p class="login-link-text">
               Don't have an account? click
@@ -78,6 +98,7 @@
             </p>
       </div>
     </form>
+</main>
     <script src="/js/login.js"></script>
   </body>
 </html>

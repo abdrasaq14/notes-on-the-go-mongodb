@@ -23,7 +23,89 @@ function togglePasswordVisibility(
     eyeSlashIcon.style.setProperty("display", "none", "important");
   }
 }
+let check_email = false;
+let check_password = false;
+const login_btn = document.querySelector(".submit-btn");
+const email_input = document.getElementById("email");
+const email_error = document.querySelector(".email-error");
+const email_confirm_icon = document.querySelector(".email-confirm-input");
+const email_error_icon = document.querySelector(".email-wrong-input");
 
+const password_input = document.getElementById("password");
+const password_input_error = document.querySelector(".new-password-error");
+const password_input_confirm_icon = document.querySelector(
+  ".password-confirm-input"
+);
+const password_input_error_icon = document.querySelector(
+  ".password-wrong-input"
+);
+
+email_input.addEventListener("blur", function (e) {
+  e.preventDefault();
+
+  if (!email_input.value.includes("@") && !email_input.value.includes(".")) {
+    email_error.style.display = "block";
+    email_error_icon.style.setProperty("display", "block", "important");
+    email_confirm_icon.style.setProperty("display", "none", "important");
+    check_email = false;
+  } else if (
+    email_input.value.includes("@") &&
+    email_input.value.includes(".") &&
+    email_input.value.length >= 5
+  ) {
+    email_error.style.display = "none";
+    email_error_icon.style.setProperty("display", "none", "important");
+    email_confirm_icon.style.setProperty("display", "block", "important");
+
+    check_email = true;
+  }
+  updateButtonState();
+});
+
+password_input.addEventListener("blur", function (e) {
+  e.preventDefault();
+  const minLength = 6;
+  if (
+    password_input.value.length >= 1 &&
+    password_input.value.length < minLength
+  ) {
+    password_input_error.style.display = "block";
+    password_input_error_icon.style.setProperty(
+      "display",
+      "block",
+      "important"
+    );
+    password_input_confirm_icon.style.setProperty(
+      "display",
+      "none",
+      "important"
+    );
+    check_password = false;
+  } else if (password_input.value.length >= minLength) {
+    password_input_error.style.display = "none";
+    password_input_error_icon.style.setProperty("display", "none", "important");
+    password_input_confirm_icon.style.setProperty(
+      "display",
+      "block",
+      "important"
+    );
+    check_password = true;
+  }
+  updateButtonState();
+});
+
+function updateButtonState() {
+  if (check_email && check_password) {
+    login_btn.disabled = false;
+  } else {
+    login_btn.disabled = true;
+  }
+}
+
+// Initially, disable the button
+updateButtonState();
+
+// send response
 const form = document.getElementById("login-form");
 form.addEventListener("submit", async function (event) {
   event.preventDefault(); // Prevent the default form submission behavior

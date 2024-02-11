@@ -19,6 +19,14 @@ body {
   align-items: center;
   justify-content: center;
 }
+main {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+}
 
 #pop-up-message-wrapper {
   display: none;
@@ -160,8 +168,8 @@ body {
 form {
   background-color: #fff;
   box-shadow: 15px 15px 15px #042551ae;
-  height: 65%;
-  max-width: 80%;
+  min-height: 65%;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,8 +178,8 @@ form {
   border-radius: 20px;
   @media all and (min-width: 768px) {
     padding: 2.2rem 2rem;
-    min-width: 30%;
-    max-width: 60rem;
+    min-width: 500px;
+    max-width: 50%;
   }
 }
 .form-wrapper {
@@ -199,6 +207,40 @@ form {
   position: absolute;
   top: 70%;
 }
+.input-icon-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 2.5rem;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(189, 189, 189, 1);
+  @media all and (max-width: 768px) {
+    height: 2.5rem;
+  }
+}
+
+.input-icon {
+  font-size: 1.2rem;
+  margin-left: 0;
+  font-weight: 700;
+  padding: 1rem;
+  background: linear-gradient(to bottom, rgb(40, 4, 81), rgba(4, 38, 81));
+}
+
+.input-style {
+  border: none !important;
+  width: 98%;
+  background-color: inherit;
+}
+
+.input-style:focus,
+.input-style:valid {
+  outline: none !important;
+  background-color: inherit;
+}
 
 label {
   display: block;
@@ -207,9 +249,47 @@ label {
   font-weight: 900;
   margin-bottom: 0.5rem;
 }
+input {
+  width: 90%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  background-color: none;
+}
 
 input::placeholder {
   opacity: 0.5;
+}
+.field-wrapper {
+  width: 100%;
+  margin-bottom: 1rem;
+  @media all and (min-width: 1000px) {
+    margin-bottom: 1rem;
+  }
+}
+.password-error {
+  display: none;
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.input-status {
+  display: none !important;
+  font-size: 0.8rem;
+  margin-right: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.25rem;
+  color: #ffffff;
+  border-radius: 100px;
+}
+.confirm-status {
+  background-color: #016b46;
+}
+
+.wrong-status {
+  background-color: #ff0173;
 }
 .signup-link {
   color: rgb(255, 247, 0);
@@ -286,6 +366,12 @@ input::placeholder {
   background: linear-gradient(to bottom, rgb(40, 4, 81), rgba(4, 38, 81));
   transition: 0.8s;
   transform: scale(1.1);
+}
+.submit-btn:disabled {
+  background: #ccc;
+  color: #333;
+  cursor: not-allowed;
+  border: none;
 }
 .zod-error,
 .database-error,

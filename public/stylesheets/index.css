@@ -8,7 +8,7 @@ body {
 }
 
 :root {
-  --fs-xl: clamp(1.5rem, 4vw + 1.5rem, 4rem);
+  --fs-xl: clamp(2.5rem, 4vw + 2.5rem, 4rem);
   --fs-600: 1.124rem;
   --fs-400: 1rem;
 }
@@ -22,13 +22,13 @@ body {
   font-family: "Nunito", sans-serif;
   color: #fff;
   background: linear-gradient(to bottom, rgba(4, 38, 81), rgb(40, 4, 81));
-  background-size: 100% 100% !important;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   padding: 0 !important;
   height: 100dvh;
-  overflow: hidden;
   line-height: 1;
+  overflow: hidden;
   font-size: var(--fs-400);
 }
 
@@ -50,14 +50,16 @@ main {
 }
 header {
   display: flex;
-  height: 5rem;
+  height: 6rem;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   margin-top: 0;
-  padding: 0;
+  padding: 0 2rem;
   background-color: rgba(4, 38, 81);
   box-shadow: 0px 8px 25px #000000ba;
+  @media all and (min-width: 768px) {
+    padding: 0 3.5rem;
+  }
 }
 .header-inner {
   display: flex;
@@ -65,9 +67,7 @@ header {
   width: 100%;
   height: 100%;
   align-items: center;
-  overflow: hidden;
   justify-content: space-between;
-  overflow-x: hidden;
   @media all and (min-width: 1500px) {
     display: flex;
     max-width: 1500px;
@@ -102,18 +102,11 @@ header {
   align-items: center;
   align-self: center;
   flex-basis: 70%;
-  margin: 0;
-  @media all and (min-width: 768px) {
-    max-width: 70%;
-    min-width: 70%;
-    width: 70%;
-    padding: 0;
-  }
 }
 .left-icon img {
-  margin-left: 2rem;
   height: 2.1rem;
   width: 1.5rem;
+  margin-right: 0.5rem;
   object-fit: contain;
   padding: 0 !important;
   overflow-x: hidden;
@@ -126,13 +119,11 @@ header {
 .left-icon-text {
   color: #ffc600;
   font-size: 1rem;
-  margin-left: 0.3rem;
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
   @media all and (min-width: 768px) {
     font-size: 2rem;
-    margin-left: 0.8rem;
     font-weight: 700;
   }
 }
@@ -148,9 +139,8 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    max-width: 30%;
-    min-width: 30%;
-    width: 30%;
+
+    overflow-x: hidden;
   }
 }
 
@@ -159,10 +149,8 @@ header {
   font-size: 2rem;
   cursor: pointer;
   display: none;
-  margin-right: 2rem;
   @media all and (min-width: 768px) {
     display: inline-block;
-    margin-right: 2rem;
   }
 }
 .day-mode {
@@ -170,10 +158,8 @@ header {
   font-size: 2rem;
   cursor: pointer;
   display: none;
-  margin-right: 2rem;
   @media all and (min-width: 768px) {
     display: inline-block;
-    margin-right: 2rem;
   }
 }
 #mobile-screen-display {
@@ -236,7 +222,6 @@ header {
   display: inline-block;
   color: #fff;
   font-size: 1.5rem;
-  margin-right: 1.5rem;
   cursor: pointer;
   @media all and (min-width: 768px) {
     display: none;
@@ -245,87 +230,99 @@ header {
 .main-body-wrapper {
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: 100vh;
   padding: 0 2rem;
   align-items: flex-start;
   justify-content: center;
-  overflow-y: visible;
-  @media all and (min-width: 1000px) {
+  overflow: hidden;
+  @media all and (min-width: 768px) {
+    padding: 0 3.5rem;
+  }
+  @media all and (min-width: 1400px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
   }
 }
-.main-body-wrapper > * {
-  flex-basis: 100%;
-  flex-grow: 1;
-}
+
 .left-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-basis: 100%;
-  align-self: center;
-  @media all and (min-width: 1000px) {
+  width: 100%;
+  overflow: hidden !important;
+  @media all and (min-width: 768px) {
+    align-items: center;
+    align-self: center;
+  }
+  @media all and (min-width: 1400px) {
     flex-basis: 50%;
     align-items: flex-start;
   }
 }
 .right-wrapper {
   display: none;
-  @media all and (min-width: 1000px) {
+  @media all and (min-width: 1400px) {
     display: flex;
     flex-basis: 50%;
     justify-content: flex-end;
-    overflow-x: visible;
     height: 100%;
+    overflow-y: visible;
     justify-content: center;
     position: relative;
   }
 }
 
 .right-wrapper img {
-  display: none;
+  display: block;
+  position: absolute;
+  top: 0%;
+  height: 120%;
+  width: auto;
+  right: -10%;
+  overflow: visible;
 
-  @media all and (min-width: 1000px) {
-    display: block;
-    overflow: visible;
-    position: absolute;
-    top: -5%;
-    transform: translate(-50% -50%);
-    height: auto;
-    object-fit: contain;
-  }
-  @media all and (min-width: 1200px) {
-    right: -5%;
-  }
+  object-fit: contain;
 }
 .main-heading {
-  font-size: var(--fs-xl);
   margin-bottom: 2rem;
-  text-align: center;
-  @media all and (min-width: 1000px) {
+  font-size: clamp(1.5rem, 4vw + 1rem, 4rem);
+  @media all and (min-width: 768px) {
+    text-align: center;
+    font-size: var(--fs-xl);
+  }
+  @media all and (min-width: 1400px) {
     text-align: left;
+    font-size: var(--fs-xl);
   }
 }
 
 .less {
   color: #ffc600;
 }
+.description-text-wrapper {
+  width: 90%;
+  @media all and (min-width: 380px) and (max-width: 767px) {
+    max-width: 350px;
+  }
+  @media all and (min-width: 768px) {
+    max-width: 450px;
+  }
+}
 .description-text {
-  width: 80%;
-  margin: 0.5rem auto;
   line-height: 1.5rem;
   font-size: var(--fs-600);
-  text-align: center;
-  @media all and (min-width: 500px) {
-    width: 60%;
+
+  @media all and (min-width: 768px) {
+    text-align: center;
   }
-  @media all and (min-width: 1000px) {
+
+  @media all and (min-width: 1400px) {
     text-align: left;
     margin-left: 0;
-    width: 80%;
+
     font-size: 1.5rem;
     line-height: 2rem;
   }
@@ -335,13 +332,11 @@ header {
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
   display: flex;
-  flex-direction: column;
   gap: 1rem;
+  width: 80%;
+  max-width: 350px;
   align-items: center;
   justify-content: space-between;
-  @media all and (min-width: 400px) {
-    flex-direction: row;
-  }
 }
 
 .sign-up-btn {
@@ -390,41 +385,5 @@ header {
   color: #042651;
   transition: 0.5s;
   font-weight: 700;
-  text-decoration: none;
-}
-
-.view-gallery-btn-wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  font-weight: 700;
-  align-self: flex-start;
-  @media all and (min-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 80%;
-    align-items: center;
-    align-self: flex-start;
-  }
-}
-
-.view-gallery-btn {
-  background-color: #ffc600;
-  margin: 0 1rem 1rem 0;
-  border-radius: 50px;
-  border: none;
-  padding: 1rem 5rem;
-  color: #042651;
-  cursor: pointer;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.view-gallery-btn:hover {
-  background-color: #af8a03;
-  color: #042651;
-  font-weight: 700;
-  transition: 0.5s;
   text-decoration: none;
 }

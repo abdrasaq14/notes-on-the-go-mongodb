@@ -20,179 +20,181 @@
 
   <body>
     <div id="pop-up-message-wrapper"></div>
-    <div class="body-wrapper">
-      <div class="left-bg-wrapper">
-        <h1 class="create-your-notes">
-          <span class="create">Create,</span> Organize and Modify your
-          <span class="create">Notes</span> on the go!
-        </h1>
-      </div>
-      <form
-        id="signup-form"
-        method="post"
-        enctype="application/x-www-form-urlencoded"
-      >
-        <div class="go-home-wrapper">
-          <a href="/" class="back-to-homepage-link"
-            ><i class="fa-solid fa-house go-home-icon"></i>Home
-          </a>
+    <main>
+      <div class="body-wrapper">
+        <div class="left-bg-wrapper">
+          <h1 class="create-your-notes">
+            <span class="create">Create,</span> Organize and Modify your
+            <span class="create">Notes</span> on the go!
+          </h1>
         </div>
-        <div class="form-wrapper">
-          <div class="form-wrapper-inner">
-            <div class="field-wrapper">
-              <label for="fullname" class="firstname">Full Name:</label>
-              <div class="input-icon-wrapper">
-                <i class="fa-regular fa-user input-icon"></i>
-
-                <input
-                  id="fullname"
-                  name="fullname"
-                  class="fullname-input input-style"
-                  placeholder="Enter your fullname"
-                  required
-                />
-                <i
-                  class="fa-solid fa-check input-status confirm-status fullname-confirm-input"
-                ></i>
-                <i
-                  class="fa-solid fa-x input-status wrong-status fullname-wrong-input"
-                ></i>
-              </div>
-
-              <span class="fullname-error password-error"
-                >Enter a valid name</span
-              >
-            </div>
-
-            <div class="field-wrapper">
-              <label for="email">Email:</label>
-              <div class="input-icon-wrapper">
-                <i class="fa-regular fa-envelope input-icon"></i>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="email-input input-style"
-                  placeholder="Enter your email"
-                  required
-                />
-                <i
-                  class="fa-solid fa-check input-status confirm-status email-confirm-input"
-                ></i>
-                <i
-                  class="fa-solid fa-x input-status wrong-status email-wrong-input"
-                ></i>
-              </div>
-
-              <span class="email-error password-error"
-                >Enter a valid email</span
-              >
-            </div>
-            <div class="field-wrapper">
-              <label for="phone">Phone:</label>
-              <div class="input-icon-wrapper">
-                <i class="bx bx-phone input-icon"></i>
-
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone_no"
-                  required
-                  value="+234"
-                  placeholder="Enter your phone number without the first 0 digit e.g 8100000000"
-                  class="phone-input input-style"
-                />
-                <i
-                  class="fa-solid fa-check input-status confirm-status phone-confirm-input"
-                ></i>
-                <i
-                  class="fa-solid fa-x input-status wrong-status phone-wrong-input"
-                ></i>
-              </div>
-
-              <span class="phone-error password-error"
-                >Enter a valid phone number, without the first '0'
-              </span>
-            </div>
-            <div class="field-wrapper">
-              <label for="newPassword">Password:</label>
-              <div class="password_wrapper">
-                <div class="input-inline-btn-wrapper">
-                  <i class="bx bx-lock-alt input-icon"></i>
+        <form
+          id="signup-form"
+          method="post"
+          enctype="application/x-www-form-urlencoded"
+        >
+          <div class="go-home-wrapper">
+            <a href="/" class="back-to-homepage-link"
+              ><i class="fa-solid fa-house go-home-icon"></i>Home
+            </a>
+          </div>
+          <div class="form-wrapper">
+            <div class="form-wrapper-inner">
+              <div class="field-wrapper">
+                <label for="fullname" class="firstname">Full Name:</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-regular fa-user input-icon"></i>
 
                   <input
-                    type="password"
-                    class="new-password inline-input"
-                    name="password"
-                    id="newPassword"
-                    placeholder="Enter your password"
+                    id="fullname"
+                    name="fullname"
+                    class="fullname-input input-style"
+                    placeholder="Enter your fullname"
                     required
                   />
                   <i
-                    class="fa-solid fa-check input-status confirm-status password-confirm-input"
+                    class="fa-solid fa-check input-status confirm-status fullname-confirm-input"
                   ></i>
                   <i
-                    class="fa-solid fa-x input-status wrong-status password-wrong-input"
+                    class="fa-solid fa-x input-status wrong-status fullname-wrong-input"
                   ></i>
-                  <button
-                    type="button"
-                    class="view-password-btn inline-icon"
-                    onclick="togglePasswordVisibility(event, 'newPassword', '.eye-icon', '.eye-slash-icon')"
-                  >
-                    <i class="fa-solid fa-eye eye-icon"></i>
-                    <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
-                  </button>
-                </div>
-                <span class="new-password-error password-error"
-                  >Password must have a minimum of six (6) characters</span
-                >
-              </div>
-            </div>
-            <div class="field-wrapper">
-              <label for="confirmPassword">Confirm password:</label>
-              <div class="password_wrapper">
-                <div class="input-inline-btn-wrapper">
-                  <i class="bx bx-lock-alt input-icon"></i>
-                  <input
-                    class="confirm-password inline-input"
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Confirm your password"
-                  />
-                  <i
-                    class="fa-solid fa-check input-status confirm-status confirm-password-confirm-input"
-                  ></i>
-                  <i
-                    class="fa-solid fa-x input-status wrong-status confirm-password-wrong-input"
-                  ></i>
-                  <button
-                    class="view-password-btn inline-icon"
-                    onclick="togglePasswordVisibility(event, 'confirmPassword', '.eye-icon', '.eye-slash-icon')"
-                  >
-                    <i class="fa-solid fa-eye eye-icon"></i>
-                    <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
-                  </button>
                 </div>
 
-                <span class="confirm-password-error password-error"
-                  >Password do not match</span
+                <span class="fullname-error password-error"
+                  >Enter a valid name</span
                 >
               </div>
+
+              <div class="field-wrapper">
+                <label for="email">Email:</label>
+                <div class="input-icon-wrapper">
+                  <i class="fa-regular fa-envelope input-icon"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="email-input input-style"
+                    placeholder="Enter your email"
+                    required
+                  />
+                  <i
+                    class="fa-solid fa-check input-status confirm-status email-confirm-input"
+                  ></i>
+                  <i
+                    class="fa-solid fa-x input-status wrong-status email-wrong-input"
+                  ></i>
+                </div>
+
+                <span class="email-error password-error"
+                  >Enter a valid email</span
+                >
+              </div>
+              <div class="field-wrapper">
+                <label for="phone">Phone:</label>
+                <div class="input-icon-wrapper">
+                  <i class="bx bx-phone input-icon"></i>
+
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone_no"
+                    required
+                    value="+234"
+                    placeholder="Enter your phone number without the first 0 digit e.g 8100000000"
+                    class="phone-input input-style"
+                  />
+                  <i
+                    class="fa-solid fa-check input-status confirm-status phone-confirm-input"
+                  ></i>
+                  <i
+                    class="fa-solid fa-x input-status wrong-status phone-wrong-input"
+                  ></i>
+                </div>
+
+                <span class="phone-error password-error"
+                  >Enter a valid phone number, without the first '0'
+                </span>
+              </div>
+              <div class="field-wrapper">
+                <label for="newPassword">Password:</label>
+                <div class="password_wrapper">
+                  <div class="input-inline-btn-wrapper">
+                    <i class="bx bx-lock-alt input-icon"></i>
+
+                    <input
+                      type="password"
+                      class="new-password inline-input"
+                      name="password"
+                      id="newPassword"
+                      placeholder="Enter your password"
+                      required
+                    />
+                    <i
+                      class="fa-solid fa-check input-status confirm-status password-confirm-input"
+                    ></i>
+                    <i
+                      class="fa-solid fa-x input-status wrong-status password-wrong-input"
+                    ></i>
+                    <button
+                      type="button"
+                      class="view-password-btn inline-icon"
+                      onclick="togglePasswordVisibility(event, 'newPassword', '.eye-icon', '.eye-slash-icon')"
+                    >
+                      <i class="fa-solid fa-eye eye-icon"></i>
+                      <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
+                    </button>
+                  </div>
+                  <span class="new-password-error password-error"
+                    >Password must have a minimum of six (6) characters</span
+                  >
+                </div>
+              </div>
+              <div class="field-wrapper">
+                <label for="confirmPassword">Confirm password:</label>
+                <div class="password_wrapper">
+                  <div class="input-inline-btn-wrapper">
+                    <i class="bx bx-lock-alt input-icon"></i>
+                    <input
+                      class="confirm-password inline-input"
+                      type="password"
+                      id="confirmPassword"
+                      placeholder="Confirm your password"
+                    />
+                    <i
+                      class="fa-solid fa-check input-status confirm-status confirm-password-confirm-input"
+                    ></i>
+                    <i
+                      class="fa-solid fa-x input-status wrong-status confirm-password-wrong-input"
+                    ></i>
+                    <button
+                      class="view-password-btn inline-icon"
+                      onclick="togglePasswordVisibility(event, 'confirmPassword', '.eye-icon', '.eye-slash-icon')"
+                    >
+                      <i class="fa-solid fa-eye eye-icon"></i>
+                      <i class="fa-solid fa-eye-slash eye-slash-icon"></i>
+                    </button>
+                  </div>
+
+                  <span class="confirm-password-error password-error"
+                    >Password do not match</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="btn-already-have-account-wrapper">
+              <div class="btn-wrapper">
+                <button class="submit-btn" type="submit">Signup</button>
+              </div>
+              <p class="login-link-text">
+                Already have an account? click
+                <a class="login-link" href="/users/login">Here</a>
+                <span> to login</span>
+              </p>
             </div>
           </div>
-          <div class="btn-already-have-account-wrapper">
-            <div class="btn-wrapper">
-              <button class="submit-btn" type="submit">Signup</button>
-            </div>
-            <p class="login-link-text">
-              Already have an account? click
-              <a class="login-link" href="/users/login">Here</a>
-              <span> to login</span>
-            </p>
-          </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </main>
 
     <script src="/js/signup.js"></script>
   </body>

@@ -45,7 +45,6 @@ let check_email = false;
 let check_phone = false;
 let check_password = false;
 let check_confirm_password = false;
-let isValid;
 fullname_input.addEventListener("blur", function (e) {
   e.preventDefault();
   const minLength = 6;
