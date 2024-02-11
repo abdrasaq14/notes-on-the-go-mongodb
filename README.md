@@ -1,31 +1,3 @@
-# week-9-task-node
+### Notes-on-the-go
 
-# Task
-
-# 1. NO_SQL
-
-### Implement this task using MongoDB
-
-### Clarification
-- Convert your week-6 task database into a NOSQL DB using `MONGODB`
-- Implement all functionalities as in the previous tasks
-- Implement pagination with limit of 5 values for each page`
-- Create Authentication and Authorization  using a middleware function
-- Implement Validation for incoming request using  **Joi or Zod**
-- Only registered users can access all `endpoints`
-- Containerize the app.
-- Use mongoDB-compass for local development
-
-### Test Coverage (Test is mandatory. No tests equals zero(0) marks):
-- Test your database using mongodb-memory-server
-- Test all endpoints `(GET, POST, PUT, DELETE)`
-
-### Hosting
-- Host your application on Fly
-
-### Documentation
-- Document your API with postman
-
-
-# 2. Mongo Aggregation Exercise.
-- Go through the readme file in the Folder `MongoAggregation`
+A note-taking app (Notes-On-The-Go) that allows users to virtually access, create, and edit notes from any device with a cross-platform synchronization feature ensuring the latest version is available across all user devices
