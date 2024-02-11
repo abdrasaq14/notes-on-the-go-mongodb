@@ -16,12 +16,16 @@ body {
   font-family: var(--main-font);
   font-weight: 500;
   font-size: 0.9rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   color: var(--main-color);
   overflow: hidden;
 }
 
 main {
   padding: 0 2rem;
+  flex: 1;
   @media all and (min-width: 1500px) {
     display: flex;
     flex-direction: column;
