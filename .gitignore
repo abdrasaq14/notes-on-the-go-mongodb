@@ -4,3 +4,7 @@ node_modules
 .dockerignore
 yarn-error.log
 lib
+yarn.lock
+yarn-error.log
+dockerfile
+
